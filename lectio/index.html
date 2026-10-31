@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Segfdo - Tecnología, tutoriales y poesía con enfoque hacker">
+<meta name="keywords" content="HTML, CSS, Linux, Apache, tutoriales, poesía">
+<meta name="author" content="Segfdo">
+<link rel="canonical" href="https://segfdo.es/lectio/">
+<meta property="og:title" content="Segfdo - Contenidos de interés general">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://segfdo.es/lectio/">
+<title>Segfdo | Tecnología y Poesía</title>
+<link rel="preload" href="css/index.css" as="style">
+<link rel="stylesheet" href="css/index.css" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="css/open_sans.css" type="text/css">
+<noscript>
+<link rel="stylesheet" href="css/index.css">
+</noscript>
+<!-- Favicons -->
+<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+<link rel="manifest" href="images/site.webmanifest">
+<style> /* CSS crítico (fold superior) */ 
+body { opacity: 0; }
+body.loaded {
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+</style>
+</head>
+
+<body class="loaded">
+<!-- Menú Lateral Fijo -->
+<header>
+<div class="image-container">
+<h1 class="h1">
+<img src="images/header_logo.png" alt="Logo Segfdo" width="auto" height="120" loading="lazy">
+  </h1>
+  <p class="header">Tecnología con alma hacker</p>
+</div>
+</header>
+<nav aria-label="Menú principal">
+<ul>
+<li><a href="../../ciber-sapiens/index.html" class="neon-link"><span class="texto-neon">Proyecto Ciber Sapiens</span></a></li>
+<li><a href="lectio_1.html" class="neon-link">Lectio 1: Analítica</a></li>
+<li><a href="#contenidos" class="neon-link">Contenidos</a></li>
+<li><a href="tutoriales.html" class="neon-link">Tutoriales</a></li>
+<li><a href="poesia.html" class="neon-link">Poesía</a></li>
+<li><a href="#contacto" class="neon-link">Contacto</a></li>
+</ul>
+<div class="image-container"><img src="images/segfdo_.png" alt="Logo corporativo Segfdo" width="" height="90" loading="lazy">
+<p>© 2026 Segfdo</p>
+</div>
+</nav>
+<!-- Contenido Principal -->
+<main class="content-hacker">
+<section>
+<article id="inicio">
+<h2 class="titulo-hacker">¡Bienvenidos a Segfdo!</h2>
+<p>Explora tecnología, tutoriales y poesía con un toque <span class="texto-neon">hacker</span>.</p>
+</article>
+
+  <article>
+    <h2 class="titulo-hacker">Sobre nosotros</h2>
+    <p>Segfdo es un sitio web personal que refleja la experiencia y conocimientos adquiridos
+      a través de diversos cursos en línea sobre diseño de páginas web.</p>
+    <p>La idea surge después de instalar el Servidor Web Apache2 sobre un distribución de Linux.
+      En el proceso aprendí muchas cosas, la primera de ellas, mis propias limitaciones; mismas que en aquella
+      frase famosa "<i>Solo se que nada se</i>" —atribuida al filósofo griego Sócrates (470-399 a. de C.)—, nos muestra que
+      el constante deseo de aprender sobre un tema, nos aproxima al mismo, sin que por ello seamos los dueños de una verdad
+      absoluta; es por ello que los temas técnicos aquí tratados tendrán una base de investigación sólida, pero en ningún momento
+      pretenden reemplazar ningún conocimiento establecido —sea por experiencia o por <span class="nosep">documentación—.</span></p>
+
+    <h2 class="titulo-hacker">Misión</h2>
+    <p>Nuestra misión es proporcionar contenidos relevantes y de interés general, abordando una variedad de temas
+      para satisfacer tus necesidades e intereses. Desde tutoriales y consejos sobre diseño web hasta artículos
+      sobre tecnología, estilo de vida y mucho más, nuestro
+      objetivo es ofrecerte información valiosa y entretenida.</p>
+    <p>Explora nuestro sitio y únete a nosotros en este viaje de aprendizaje y descubrimiento.</p>
+    <p>¡Esperamos que encuentres inspiración y disfrutes de tu visita!</p>
+
+    <div class="image-container">
+      <h2 class="titulo-hacker" id="contenidos">Contenidos&ensp;
+        <a href="lectio_1.html">
+          <img style="border:0;height: 22px;" src="images/flecha.png" alt="A lista de contenidos">
+        </a>
+      </h2>
+    </div>
+
+    <p>Encontrarás temas variados, discriminados como:</p>
+    <p>'Lecturas' —desde la aproximación a una analítica clínica, hasta historias relacionadas con sitios de interés, y un largo etcétera—.</p>
+    <p>'Artículos' —sobre tecnología, estilo de vida y mucho más—.</p>
+    <p>'Tutoriales' —pequeños manuales enfocados a objetivos concretos, consejos de uso, y más—.</p>
+    <p>'Poesía' —contribuciones inéditas, poetas conocidos…—.</p>
+
+    <h2 class="titulo-hacker" id="contacto">Contacto</h2>
+    <p>¿Colaboraciones? Escríbenos a <a href="mailto:admin@segfdo.es" class="link-email">admin@segfdo.es</a></p>
+    <form action="#" method="post">
+<label for="name">Nombre:</label>
+<input type="text" id="name" name="name" required>
+<label for="email">Correo electrónico:</label>
+<input type="email" id="email" name="email" required>
+<label for="message">Mensaje:</label>
+<textarea id="message" name="message" rows="4" required></textarea>
+<button type="submit">Enviar</button>
+</form>
+  </article>
+</section>
+</main>
+
+<!-- Footer -->
+<footer class="footer-hacker">
+<div class="footer-content">
+<p>
+<a href="https://jigsaw.w3.org/css-validator/check/referer" class="image-container">
+<img style="border:0;width:88px;height:31px" src="images/vcss-blue.gif" alt="Servicio de Validación de Marcaje W3C">
+</a>
+    <a href="index.html" class="image-container">
+      <img style="border:0;width: 78px;height: 31px" src="images/Logo_segfdo_verde_footer.png" alt="Logo segfdo color verde para footer">
+    </a>
+  </p>
+  © &bull; segfdo.es  &bull; 2026  &bull; Contacto:&#160;<a href="mailto:admin@segfdo.es">admin@segfdo.es</a>
+</div>
+</footer>
+</body>
+
+</html>

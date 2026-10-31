@@ -1,0 +1,182 @@
+/* === [RESET BÃSICO] === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* === [TIPOGRAFÃA] === */
+/* css/open_sans.css - VersiÃ³n mejorada */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&display=swap');
+
+body {
+  font-family: "Open Sans", Arial, sans-serif;
+  line-height: 1.5;
+  color: #333;
+  background: #fff5e6;
+}
+
+/* Estilo del header. Crea el contenedor para el encabezado. */  
+/* --- [HEADER CONSISTENTE] --- */
+header {
+    background-color: #FF8C00;              /* Cambiado a Naranja header por coherencia */
+    padding: 10px;
+    text-align: center;
+    font-size: 35px;
+    line-height: 1.1%;
+	  width: 100%;
+  	padding: 2rem 1rem !important;            /* Fuerza el mismo padding que lectio_1 */
+    color: white;
+  }
+
+header h1 {
+  font-size: 2.5rem !important;               /* Igual que "Lecturas" */
+  margin: 0;
+  text-align: center;
+  color: white !important;
+  letter-spacing: 1px;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-weight: 900;
+    line-height: 1.1;
+    text-align: left;
+    color: #4d4dff;
+	margin: 0.5em 0;
+    page-break-after: avoid;
+  }
+
+h1 {
+  font-size: 2rem;
+}
+h2 {
+  font-size: 1.75rem;
+}
+h3 {
+  font-size: 1.5rem;
+}
+
+.h1 {
+  font-family: 'Open Sans', Arial, sans-serif;
+  font-weight: 900;
+  font-size: 2.2em;
+  color: #FFFFFF; /* Blanco para Header */
+  text-align: center;
+}
+
+/* === [EFECTO TEXTO NEÓN / ACENTO HACKER] === */
+.texto-neon {
+    color: #20c997; /* Verde corporativo neón */
+    text-shadow: 0 0 8px rgba(32, 201, 151, 0.4);
+    transition: all 0.3s ease;
+}
+
+.texto-neon:hover {
+    color: #28a745;
+    text-shadow: 0 0 12px rgba(40, 167, 69, 0.6);
+    text-decoration: none;
+}
+
+/* === [ESTRUCTURA] === */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+header,
+footer {
+  background: #ff8c00;
+  padding: 1rem;
+  text-align: center;
+}
+
+/* Crea dos columnas/cajas que flotan una junto a la otra */
+
+/* La primera columnna/caja serÃ­a la etiqueta <nav> que contine la lista de enlaces de la pÃ¡gina */
+
+nav {
+  float: left;
+  width: 30%;
+  background: #fff5e6;
+  padding: 20px;
+}
+/* Estilo de lista no ordenada del menÃƒÂº */
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+/* Decoradores de lista no ordenada del menÃƒÆ’Ã‚Âº */
+
+nav a {
+  color: #4d4dff;
+  text-decoration: none;
+  padding: 0 15px;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* Centrar verticalmente la imagen debajo de la lista no ordenada del menÃƒÆ’Ã‚Âº <nav> */
+
+.container {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente el contenido */
+  align-items: center; /* Centra verticalmente el contenido */
+  height: auto; /* Altura del contenedor, ajustable segÃƒÆ’Ã‚Âºn sea necesario */
+}
+
+.image-container {
+  display: inline-block; /* Permite que el enlace se ajuste al tamaÃƒÆ’Ã‚Â±o de la imagen */
+}
+
+.image-container img {
+  max-width: 100%; /* Asegura que la imagen no sea mÃƒÆ’Ã‚Â¡s ancha que el contenedor */
+  max-height: 100%; /* Asegura que la imagen no sea mÃƒÆ’Ã‚Â¡s alta que el contenedor */
+  vertical-align: super; /* Alinea verticalmente la imagen dentro del contenedor */
+}
+
+/* Para todas las secciones */
+
+section {
+  padding: 20px;
+}
+
+/* Corresponde a la segunda columna/caja */
+
+article {
+  float: left;
+  padding: 20px;
+  width: 70%;
+  background: #fff5e6;
+}
+
+/* Limpia los floats para que la siguiente secciÃƒÆ’Ã‚Â³n no sea en columnas */
+
+section::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Esta clase complementa el efecto */
+
+.clearfix {
+  overflow: auto;
+}
+
+/* === [RESPONSIVO] === */
+@media (max-width: 768px) {
+  nav ul {
+    flex-direction: column;
+    align-items: center;
+  }
+}

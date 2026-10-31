@@ -1,0 +1,92 @@
+/* Hoja de Estilos que se aplica a Tutoriales listados en tutoriales.html */
+        /* Estilos específicos mínimos para mantener la soberanía visual */
+
+        /* === [TIPOGRAFÃA] === */
+        /* css/open_sans.css - VersiÃ³n mejorada */
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&display=swap');
+
+        body {
+            font-family: "DejaVu Sans Mono", monospace, sans-serif;
+            line-height: 1.6;
+            color: #222;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fdfdfd;
+        }
+
+        header {
+            border-bottom: 2px solid #333;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+
+        h1 { font-size: 1.8rem; margin: 0 0 5px 0; }
+        .subtitle { font-style: italic; color: #555; }
+
+        article {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+        }
+
+        h2 { font-size: 1.4rem; color: #111; margin-top: 0; border-bottom: 1px solid #eee; padding-bottom: 8px; }
+
+        p { margin: 1em 0; }
+
+        pre {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.9rem;
+        }
+
+        code { font-family: "DejaVu Sans Mono", monospace; }
+
+        .inline-code {
+            background: #f4f4f4;
+            color: #c7254e;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+
+        .note {
+            background: #eef6fc;
+            border-left: 4px solid #3182ce;
+            padding: 12px 15px;
+            margin: 20px 0;
+            font-size: 0.95rem;
+        }
+        /* === [EFECTO TEXTO NEÓN / ACENTO HACKER] === */
+        .texto-neon {
+            color: #20c997; /* Verde corporativo neón */
+            text-shadow: 0 0 8px rgba(32, 201, 151, 0.4);
+            transition: all 0.3s ease;
+}
+
+        .texto-neon:hover {
+            color: #28a745;
+        text-shadow: 0 0 12px rgba(40, 167, 69, 0.6);
+        text-decoration: none;
+}
+
+        footer {
+            margin-top: 50px;
+            padding-top: 15px;
+            padding-bottom: 1rem;
+            border-top: 1px solid #ccc;
+            text-align: center;
+            font-family: 'Open Sans', Arial, sans-serif;
+            color: #666;
+            background: #ff8c00;
+        }
+
+        a { color: #2b6cb0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+    

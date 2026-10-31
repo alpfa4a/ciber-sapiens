@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Poesía y Código - Zen de Python en Español | Segfdo">
+<link rel="canonical" href="https://segfdo.es/lectio/poesia.html">
+<title>Poesía y Código: Zen de Python | Segfdo</title>
+<link rel="preload" href="css/index.css" as="style">
+<link rel="stylesheet" href="css/index.css" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="css/open_sans.css" type="text/css">
+<noscript>
+<link rel="stylesheet" href="css/index.css">
+</noscript>
+<!-- Favicons -->
+<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+<link rel="manifest" href="images/site.webmanifest">
+<style> 
+body { opacity: 0; }
+body.loaded { opacity: 1; transition: opacity 0.5s ease; }
+
+/* Estilos específicos para la consola interactiva de poesía */
+.poesia-container {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background-color: rgba(0, 0, 0, 0.03);
+    border-left: 3px solid #ff7b00;
+}
+.botones-interactivos {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+}
+.btn-hacker {
+    background-color: transparent;
+    border: 1px solid #ff7b00;
+    color: inherit;
+    padding: 0.6rem 1.2rem;
+    font-family: inherit;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.btn-hacker:hover {
+    background-color: #ff7b00;
+    color: #fff;
+}
+.consola-respuesta {
+    background-color: #121212;
+    color: #00ff66;
+    padding: 1.2rem;
+    font-family: monospace;
+    white-space: pre-wrap;
+    border-radius: 4px;
+    min-height: 180px;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    border: 1px solid #333;
+}
+</style>
+</head>
+
+<body class="loaded">
+<!-- Menú Lateral Fijo -->
+<header>
+<div class="image-container">
+<h1 class="h1">
+<img src="images/header_logo.png" alt="Logo Segfdo" width="auto" height="140" loading="lazy">
+</h1>
+<p class="header">Tecnología con alma hacker</p>
+</div>
+</header>
+<nav aria-label="Menú principal">
+<ul>
+<li><a href="index.html" class="neon-link">Inicio</a></li>
+<li><a href="lectio_1.html" class="neon-link">Lectio 1: Analítica</a></li>
+<li><a href="tutoriales.html" class="neon-link">Tutoriales</a></li>
+<li><a href="poesia.html" class="neon-link">Poesía</a></li>
+<li><a href="index.html#contacto" class="neon-link">Contacto</a></li>
+</ul>
+<div class="image-container">
+<img src="images/segfdo_.png" alt="Logo corporativo Segfdo" width="" height="90" loading="lazy">
+<p>© 2026 Segfdo</p>
+</div>
+</nav>
+
+<!-- Contenido Principal -->
+<main class="content-hacker">
+<section>
+<article>
+<h2 class="titulo-hacker">Poesía Computacional: El Zen de Python</h2>
+<p>Bajo la premisa de la práctica del afilado ("Taja-Lápiz"), la lógica formal también alberga belleza estética. Este espacio rinde homenaje al divertimento original adaptado al español a partir de la obra de Tim Peters.</p>
+
+<div class="poesia-container">
+    <h3 class="titulo-hacker" style="font-size: 1.2rem; margin-bottom: 1rem;">Banco de Pruebas / Laboratorio</h3>
+    
+    <div class="botones-interactivos">
+        <button class="btn-hacker" onclick="mostrarCasoA()">Caso A: Cifrado / Inglés</button>
+        <button class="btn-hacker" onclick="mostrarCasoB()">Caso B: Descifrado / Español</button>
+    </div>
+
+    <p style="font-size: 0.85rem; margin-bottom: 0.5rem; opacity: 0.8;">Casilla de Respuesta:</p>
+    <div id="consola" class="consola-respuesta">// Selecciona una opción superior para compilar el flujo...</div>
+</div>
+
+<p style="margin-top: 2rem;"><a href="index.html" class="texto-neon">&larr; Volver a la portada principal</a></p>
+</article>
+</section>
+</main>
+
+<script>
+// El texto cifrado original en ROT13 (extraído directamente de tu módulo)
+const TEXTO_CIFRADO = `\nRy Mra qr Clguba, cbe Gvz Crgref\n\nOryyb rf zrwbe dhr srb.\nRkcyípvgb rf zrwbe dhr vzcyípvgb.\nFvzcyr rf zrwbe dhr pbzcyrwb.\nPbzcyrwb rf zrwbe dhr pbzcyvpnqb.\nCynab rf zrwbe dhr navqnqb.\nQvfcrefb rf zrwbe dhr qrafb.\nYn yrtvovyvqnq phragn.\nYbf pnfbf rfcrpvnyrf ab fba gna rfcrpvnyrf pbzb cnen ebzcre ynf ertynf.\nNhadhr yn cenpgvpvqnq yr tnan n yn chermn.\nYbf reeberf ahapn qroreína cnfne fvyrapvbfnzragr.\nN zrabf dhr fr fvyrapvra rkcyípvgnzragr.\nSeragr n yn nzovtürqnq, erpunmn yn gragnpvóa qr nqvivane.\nQroreín unore han, l cersrevoyrzragr fbyb han, znaren boivn qr unpreyb.\nNhadhr rfn znaren chrqr ab fre boivn ny cevapvcvb n zrabf dhr frnf ubynaqéf.\nNuben rf zrwbe dhr ahapn.\nNhadhr ahapn rf n zrahqb zrwbe dhr *nuben* zvfzb.\nFv yn vzcyrzragnpvóa rf qvsípvy qr rkcyvpne, rf han znyn vqrn.\nFv yn vzcyrzragnpvóa rf sápvy qr rkcyvpne, chrqr fre han ohran vqrn.\nYbf rfcnpvbf qr abzoerf fba han tena vqrn, ¡untnzbf záf qr rfbf!`;
+
+// Función ROT13 adaptada en JavaScript equivalente a tu script de Python
+function rot13(str) {
+    return str.replace(/[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]/g, function(c) {
+        let code = c.charCodeAt(0);
+        // Manejo básico de mayúsculas/minúsculas ASCII
+        if (code >= 65 && code <= 90) {
+            return String.fromCharCode(((code - 65 + 13) % 26) + 65);
+        } else if (code >= 97 && code <= 122) {
+            return String.fromCharCode(((code - 97 + 13) % 26) + 97);
+        }
+        return c; // Deja intactos acentos o símbolos especiales si los hubiera
+    });
+}
+
+function mostrarCasoA() {
+    const consola = document.getElementById('consola');
+    consola.textContent = "--- CASO A: FLUJO CIFRADO (ROT13 / ORIGEN) ---\n" + TEXTO_CIFRADO;
+}
+
+function mostrarCasoB() {
+    const consola = document.getElementById('consola');
+    const textoDescifrado = rot13(TEXTO_CIFRADO);
+    consola.textContent = "--- CASO B: ZEN DE PYTHON (ESPAÑOL / ORDENADO) ---\n" + textoDescifrado;
+}
+</script>
+
+<!-- Footer -->
+<footer class="footer-hacker">
+<div class="footer-content">
+<p>
+<a href="https://jigsaw.w3.org/css-validator/check/referer" class="image-container">
+<img style="border:0;width:88px;height:31px" src="images/vcss-blue.gif" alt="Servicio de Validación de Marcaje W3C">
+</a>
+    <a href="index.html" class="image-container">
+      <img style="border:0;width: 78px;height: 31px" src="images/Logo_segfdo_verde_footer.png" alt="Logo segfdo color verde para footer">
+    </a>
+  </p>
+  © &bull; segfdo.es  &bull; 2026  &bull; Contacto:&#160;<a href="mailto:admin@segfdo.es">admin@segfdo.es</a>
+</div>
+</footer>
+</body>
+
+</html>

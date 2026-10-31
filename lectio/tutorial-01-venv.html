@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriales &amp; Cuadernos Técnicos — segfdo.es</title>
+    <link rel="stylesheet" href="css/tutorial-n-tema.css"> <!-- Ajusta la ruta a tus estilos relativos -->
+    
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+    <link rel="manifest" href="images/site.webmanifest">
+    <!--
+    <style>
+        /* Estilos específicos mínimos para mantener la soberanía visual */
+        body {
+            font-family: "DejaVu Sans Mono", monospace, sans-serif;
+            line-height: 1.6;
+            color: #222;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fdfdfd;
+        }
+        header {
+            border-bottom: 2px solid #333;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+        h1 { font-size: 1.8rem; margin: 0 0 5px 0; }
+        .subtitle { font-style: italic; color: #555; }
+        article {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+        }
+        h2 { font-size: 1.4rem; color: #111; margin-top: 0; border-bottom: 1px solid #eee; padding-bottom: 8px; }
+        p { margin: 1em 0; }
+        pre {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.9rem;
+        }
+        code { font-family: "DejaVu Sans Mono", monospace; }
+        .inline-code {
+            background: #f4f4f4;
+            color: #c7254e;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        .note {
+            background: #eef6fc;
+            border-left: 4px solid #3182ce;
+            padding: 12px 15px;
+            margin: 20px 0;
+            font-size: 0.95rem;
+        }
+        footer {
+            margin-top: 50px;
+            padding-top: 15px;
+            border-top: 1px solid #ccc;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #666;
+        }
+        a { color: #2b6cb0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+    </style>
+    -->
+</head>
+<body>
+
+    <header>
+        <h1>🛠️ Cuadernos de Trinchera</h1>
+        <div class="subtitle">Guías prácticas sobre administración soberana, código y entornos Linux.</div>
+    </header>
+
+    <main>
+        <article>
+            <h2>Aislamiento de Proyectos en Python 3 mediante <code class="inline-code">venv</code></h2>
+            
+            <p>En distribuciones Linux modernas basadas en Debian/Ubuntu, la ejecución directa de <code class="inline-code">pip install</code> a nivel global se encuentra restringida por diseño (<a href="https://peps.python.org/pep-0668/" target="_blank" rel="noopener">PEP 668</a>). Esto evita que paquetes externos sobrescriban las librerías nativas gestionadas por el administrador de paquetes del sistema operativo (<code class="inline-code">apt</code>).</p>
+            
+            <p>La vía limpia, elegante y soberana para instalar dependencias sin alterar el sistema base es el uso de entornos virtuales propios.</p>
+
+            <h3>1. Preparación del paquete base</h3>
+            <p>Comprueba que dispones del módulo de entornos virtuales de Python instalado en el sistema:</p>
+            <pre><code>sudo apt update
+sudo apt install python3-venv python3-full</code></pre>
+
+            <h3>2. Creación del entorno aislado</h3>
+            <p>Sitúate en el directorio raíz de tu proyecto y genera la carpeta del entorno virtual (se suele denominar <code class="inline-code">.venv</code> u <code class="inline-code">env</code>):</p>
+            <pre><code>cd /ruta/a/tu/proyecto
+python3 -m venv .venv</code></pre>
+
+            <h3>3. Activación y uso</h3>
+            <p>Para trabajar dentro del entorno aislado, ejecuta el script de activación en la shell actual:</p>
+            <pre><code>source .venv/bin/activate</code></pre>
+            <p>Verás que la línea de comandos antepone el prefijo <code class="inline-code">(.venv)</code>. A partir de este momento, cualquier llamada a <code class="inline-code">pip</code> instalará las librerías exclusivamente dentro de la carpeta local de tu proyecto:</p>
+            <pre><code>pip install nombre_del_paquete</code></pre>
+
+            <h3>4. Desactivación</h3>
+            <p>Una vez concluida la sesión de trabajo, puedes salir del entorno virtual simplemente invocando:</p>
+            <pre><code>deactivate</code></pre>
+
+            <div class="note">
+                <strong>📌 Nota de buena práctica para repositorios Git:</strong> Si utilizas control de versiones, recuerda añadir siempre la carpeta del entorno virtual a tu archivo <code class="inline-code">.gitignore</code> para evitar subir binarios o dependencias compiladas al servidor:
+                <pre style="margin-top: 8px; margin-bottom: 0;"><code>echo ".venv/" >> .gitignore</code></pre>
+            </div>
+        </article>
+
+        <!-- Barra de Navegación de Trinchera para la Raíz -->
+        <nav style="background: #1e1e1e; padding: 12px 20px; font-family: 'DejaVu Sans Mono', monospace; font-size: 0.9rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #ff8c00;">
+        <span style="color: #ff8c00; font-weight: bold;">// segfdo.es &gt; ciber-sapiens</span>
+        <div>
+            <a href="tutoriales.html" class="texto-neon" style="margin-left: 15px; text-decoration: none;">🛠️ Cuadernos</a> &bull; 
+            <a href="lectio_1.html" class="texto-neon" style="margin-left: 10px; text-decoration: none;">📖 Lectio</a> &bull; 
+            <a href="poesia.html" class="texto-neon" style="margin-left: 10px; text-decoration: none;">✍️ Poesía</a>
+        </div>
+        </nav>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-hacker">
+    <div class="footer-content">
+    <p>
+    <a href="https://jigsaw.w3.org/css-validator/check/referer" class="image-container">
+    <img style="border:0;width:88px;height:31px" src="images/vcss-blue.gif" alt="Servicio de Validación de Marcaje W3C">
+    </a>
+    <a href="index.html" class="image-container">
+      <img style="border:0;width: 78px;height: 31px" src="images/Logo_segfdo_verde_footer.png" alt="Logo segfdo color verde para footer">
+    </a>
+    </p>
+    © &bull; segfdo.es  &bull; 2026  &bull; Contacto:&#160;<a href="mailto:admin@segfdo.es">admin@segfdo.es</a>
+    </div>
+    </footer>
+
+</body>
+</html>

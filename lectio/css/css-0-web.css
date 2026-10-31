@@ -1,0 +1,261 @@
+* {
+    box-sizing: border-box;
+  }
+
+/* css/open_sans.css - VersiÃ³n mejorada */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&display=swap');
+
+  /* Cambio para establecer "portada.webp" como "background" */
+  
+  body {
+      background-image: url('portada.webp');
+      background-size: cover; /* Para asegurarse de que la imagen cubra todo el fondo */
+      background-position: center; /* Para centrar la imagen en el fondo */
+  }
+  
+  /* Verificar fuente para pantallas grandes */
+  
+  body {
+    margin: 0;
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-stretch: 100%;
+    src: url(https://fonts.gstatic.com/s/opensans/v40/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsjZ0B4iaVIGxA.woff2) format('woff2');
+    unicode-range: U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F;
+    text-align: justify;
+    padding: 10px;
+    background: #FFF5E6;
+  }
+  
+  /* Estilo del header. Crea el contenedor para el encabezado. */
+  
+  header {
+    background-color: #FF8C00; /* Cambiado a Naranja header por coherencia */
+    padding: 10px;
+    text-align: center;
+    font-size: 35px;
+    line-height: 1.1%;
+	width: 100%;
+    color: white;
+  }
+  
+  /* Crea dos columnas/cajas que flotan una junto a la otra */
+  
+  /* La primera columnna/caja serÃƒÂ¡ la etiqueta <nav> que contine la lista de enlaces de la pÃƒÂ¡gina */
+  
+  nav {
+    float: left;
+    width: 30%;
+    background: #FFF5E6;
+    padding: 20px;
+  }
+  /* Estilo de lista no ordenada del menÃº */
+  
+  nav ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  /* Decoradores de lista no ordenada del menÃƒÂº */
+  
+  nav a {
+    color: #4d4dff;
+    text-decoration: none;
+    padding: 0 15px;
+  }
+  
+  nav a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Centrar verticalmente la imagen debajo de la lista no ordenada del menÃƒÂº <nav> */
+  
+  .container {
+    display: flex;
+    justify-content: center;  /* Centra horizontalmente el contenido */
+    align-items: center;      /* Centra verticalmente el contenido */
+    height: 600px;            /* Altura del contenedor, ajustable segÃƒÂºn sea necesario */
+  }
+  
+  .image-container {
+    display: inline-block;     /* Permite que el enlace se ajuste al tamaÃƒÂ±o de la imagen */
+  }
+  
+  .image-container img {
+    max-width: 100%;           /* Asegura que la imagen no sea mÃƒÂ¡s ancha que el contenedor */
+    max-height: 100%;          /* Asegura que la imagen no sea mÃƒÂ¡s alta que el contenedor */
+    vertical-align: super;    /* Alinea verticalmente la imagen dentro del contenedor */
+  }
+  
+  /* Para todas las secciones */
+  
+  section {
+    padding: 20px;
+  }
+  
+  /* Corresponde a la segunda columna/caja */
+  
+  article {
+    float: left;
+    padding: 20px;
+    width: 70%;
+    background: #FFF5E6;
+  }
+  
+  /* Limpia los floats para que la siguiente secciÃƒÂ³n no sea en columnas */
+  
+  section::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  /* Esta clase complementa el efecto */
+  
+  .clearfix {
+    overflow: auto;
+  }
+  
+  /* Estilo personalizado para tÃ­tulos */
+
+
+.h1 {
+  font-family: 'Open Sans', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 2.2em;
+  color: #FFFFFF; /* Blanco para Header */
+  text-align: center;
+}
+  
+  h2,h3,h4,h5,h6,.h2,.h3,.h4,.h5,.h6 {
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-weight: 900;
+    line-height: 1.1;
+    text-align: left;
+    color: #4d4dff;
+	margin: 0.5em 0;
+    page-break-after: avoid;
+  }
+  
+  p {
+    orphans: 3;
+  }
+  
+  
+  /* Tablas */
+  td {
+    font-family: "monospace", "Courier New PSMT", monospace;
+    font-size: 10.1pt;
+    font-weight: normal;
+    color: #000000;
+  }
+  
+  /* Estilo para todas las tablas */
+  table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;  
+  /* Combinar bordes de celda */
+    width: 100%;
+  /* Ancho completo de la tabla */
+  }
+  
+  /* Estilo para los tÃƒÂ­tulos de la tabla */
+  th {
+    font-weight: bold;         /* Texto en negrita */
+  }
+  
+  /* Estilo para las celdas de la tabla */
+  
+  td,th,tr {                   /* Estilo de lÃƒÂ­nea para las celdas */
+    padding: 8px;              /* Espaciado interno */
+    text-align: left;          /* AlineaciÃƒÂ³n del texto */
+  }
+  
+  /* Estilo alternativo para filas pares */
+  
+  tr:nth-child(even) {
+    background-color: #e6e6e6; /* Fondo gris claro para filas pares */
+  }
+  
+  /* Estilos para las celdas de la tabla */
+  
+  td,th,tr {
+    font-family: "monospace", "Courier New PS", monospace;
+    font-size: 10.1pt;
+    color: #000000;
+  }
+  
+  /* Estilos para la primera columna */
+  
+  td:first-child {
+    width: 312px;
+  }
+  
+  /* Estilos para la segunda columna */
+  
+  td:nth-child(2) {
+    text-align: center;
+    width: 83px;
+  }
+  
+  /* Estilos para la tercera columna */
+  
+  td:nth-child(3) {
+    text-align: center;
+    width: 99px;
+  }
+  
+  /* Estilos para la cuarta columna */
+  
+  td:nth-child(4) {
+    text-align: center;
+    width: 150px;
+  }
+  
+  .tabla-container {
+    margin: 0 auto;            /* Centrar la tabla horizontalmente */
+    width: fit-content;        /* Ajustar el ancho al contenido de la tabla */
+  }
+  
+  .container
+  .container-fluid {
+    border-radius: 6px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  
+  /* Familia de fuentes para etiquetas <code> */
+  
+  code {
+    font-family: Consolas, Menlo, "Courier New", monospace;
+  }
+  
+  footer {
+    background-color: #FF8C00; /* cambiado a Naranja Python por coherencia */
+    color: #fff;
+    text-align: center;
+    font-weight: 400;
+    font-stretch: 100%;
+    src: url(https://fonts.gstatic.com/s/opensans/v40/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsjZ0B4iaVIGxA.woff2) format('woff2');
+    unicode-range: U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F;
+    font-size: 11pt;
+    padding: 10px;
+    width: 100%;
+  }
+  
+  footer a {
+    color: #ffffff;
+    text-decoration: none;
+  }  
+  
+  /* DiseÃ±o responsivo: hace que las dos columnas/cuadros se apilen uno encima del otro en lugar de uno al lado
+  del otro, en pantallas pequeÃ±as */
+  
+      /* Estilos para dispositivos con un ancho mÃƒÂ¡ximo de 600px (mÃƒÂ³viles) */
+      @media (max-width: 600px) {
+        nav, article {
+          width: 100%;
+        }
+      }
+  
