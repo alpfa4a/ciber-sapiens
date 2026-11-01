@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="100%" height="100%">
+  <!-- Fondo transparente: heredará el color oscuro de la caja de diálogo -->
+  
+  <!-- CONFLUENCIA CENTRAL (Marco Dorado Shibumi) -->
+  <g transform="translate(400, 200)">
+    <!-- Rombo exterior -->
+    <rect x="-45" y="-45" width="90" height="90" fill="none" stroke="#d4af37" stroke-width="2" transform="rotate(45)" opacity="0.8" />
+    <!-- Rombo interior fino -->
+    <rect x="-35" y="-35" width="70" height="70" fill="none" stroke="#d4af37" stroke-width="0.5" transform="rotate(45)" />
+    <!-- Núcleo de convergencia -->
+    <circle cx="0" cy="0" r="4" fill="#d4af37" />
+  </g>
+
+  <!-- NODO HUMANO (Izquierda) - Curvas orgánicas y pensamiento no lineal -->
+  <g stroke="#e0e0e0" fill="none">
+    <!-- Líneas de conexión orgánica (Curvas Bezier) -->
+    <path d="M 120 200 C 180 120, 280 250, 360 200" stroke-width="1.5" opacity="0.8" />
+    <path d="M 160 100 C 220 150, 300 130, 370 170" stroke-width="1" opacity="0.5" />
+    <path d="M 140 320 C 240 280, 280 260, 370 230" stroke-width="1" opacity="0.5" />
+    
+    <!-- Puntos de origen biológico -->
+    <circle cx="120" cy="200" r="5" fill="#e0e0e0" />
+    <circle cx="160" cy="100" r="3" fill="#e0e0e0" opacity="0.7" />
+    <circle cx="140" cy="320" r="4" fill="#e0e0e0" opacity="0.7" />
+  </g>
+
+  <!-- NODO CIBERNÉTICO (Derecha) - Geometría, lógica y red estructurada -->
+  <g stroke="#4a90e2" fill="none">
+    <!-- Líneas de red estructurada (Polilíneas) -->
+    <polyline points="680,200 580,150 440,200" stroke-width="1.5" opacity="0.8" />
+    <polyline points="640,100 520,130 430,170" stroke-width="1" opacity="0.5" />
+    <polyline points="660,320 540,260 430,230" stroke-width="1" opacity="0.5" />
+    <!-- Conexión transversal técnica -->
+    <line x1="580" y1="150" x2="540" y2="260" stroke-width="0.5" opacity="0.4" />
+    
+    <!-- Nodos de procesamiento lógico -->
+    <circle cx="680" cy="200" r="4" fill="#4a90e2" />
+    <circle cx="580" cy="150" r="3" fill="#4a90e2" />
+    <circle cx="540" cy="260" r="3" fill="#4a90e2" />
+    <circle cx="640" cy="100" r="2" fill="#4a90e2" opacity="0.7" />
+    <circle cx="660" cy="320" r="3" fill="#4a90e2" opacity="0.7" />
+  </g>
+</svg>

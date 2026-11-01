@@ -1,0 +1,68 @@
+/* Estilo del header. Crea el contenedor para el encabezado. */  
+/* --- [HEADER CONSISTENTE] --- */
+header {
+    background-color: #FF8C00;              /* Cambiado a Naranja header por coherencia */
+    padding: 10px;
+    text-align: center;
+    font-size: 35px;
+    line-height: 1.1%;
+	  width: 100%;
+  	padding: 2rem 1rem !important;            /* Fuerza el mismo padding que lectio_1 */
+    color: white;
+  }
+
+header h1 {
+  font-size: 2.5rem !important;               /* Igual que "Lecturas" */
+  margin: 0;
+  text-align: center;
+  color: white !important;
+  letter-spacing: 1px;
+}
+
+  /* Contenedor global de cada diálogo */
+.caja-dialogo {
+  margin-bottom: 2.5rem;
+  border: 1px solid #333333;
+  border-radius: 4px;
+  background-color: #111111;
+  overflow: hidden;
+}
+
+/* Caja de la Pregunta */
+.bloque-pregunta {
+  padding: 1.2rem 1.5rem;
+  background-color: #1a1a1a;
+  border-bottom: 1px solid #2a2a2a;
+}
+
+.bloque-pregunta h3 {
+  margin: 0.4rem 0 0 0;
+  color: #e0e0e0;
+  font-size: 1.15rem;
+}
+
+/* Caja de la Respuesta */
+.bloque-respuesta {
+  padding: 1.5rem;
+  background-color: #0d0d0d;
+  color: #cccccc;
+  line-height: 1.6;
+}
+
+/* Etiquetas técnicas superiores */
+.etiqueta, .etiqueta-respuesta {
+  font-family: monospace;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.etiqueta {
+  color: #d4af37; /* Tono dorado característico */
+}
+
+.etiqueta-respuesta {
+  color: #777777;
+  display: block;
+  margin-bottom: 0.8rem;
+}

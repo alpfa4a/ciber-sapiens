@@ -72,8 +72,28 @@
 
         .texto-neon:hover {
             color: #28a745;
-        text-shadow: 0 0 12px rgba(40, 167, 69, 0.6);
-        text-decoration: none;
+            text-shadow: 0 0 12px rgba(40, 167, 69, 0.6);
+            text-decoration: none;
+}
+        /* Específico para imagen de nodos en svg */
+        .caja-dialogo-imagen {
+            margin-bottom: 3rem;
+            text-align: center; /* Centrar la imagen y el pie */
+}
+
+        .emblema-tecnico {
+            max-width: 60%; /* Controlar el tamaño para no recargar */
+            height: auto;
+            border: 1px solid #d4af37; /* Borde dorado haciendo eco con el marco de la imagen */
+            border-radius: 4px;
+            background-color: #111111; /* Un fondo sutil para destacarla */
+            padding: 10px;
+}
+
+        .pie-imagen {
+            margin-top: 1rem;
+            color: #777777;
+            font-size: 0.8rem;
 }
 
         footer {
