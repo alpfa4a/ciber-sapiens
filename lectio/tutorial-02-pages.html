@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soberanía Estática en GitHub Pages — segfdo.es</title>
+    <link rel="stylesheet" href="css/tutorial-n-tema.css"> <!-- Ajusta la ruta a tus estilos relativos -->
+    
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+    <link rel="manifest" href="images/site.webmanifest">
+</head>
+<body>
+
+    <header>
+        <h1>🛠️ Cuadernos de Trinchera [02]</h1>
+        <div class="subtitle">Guías prácticas sobre administración soberana, código y entornos Linux.</div>
+    </header>
+
+    <main>
+        <article>
+            <h2>Escape del alquiler digital: Despliegue soberano en GitHub Pages</h2>
+            
+            <p>En una red saturada de plataformas propietarias y servicios de pago recurrentes para alojar simples páginas web, recuperar el control de nuestra infraestructura pasa por abrazar la simplicidad del código estático (HTML, CSS y recursos nativos) combinado con la versatilidad de <code class="inline-code">git</code>.</p>
+            
+            <p>Este cuaderno detalla los pasos de trinchera para estructurar, versionar y publicar un sitio web autosuficiente sin depender de servidores intermediarios ni pasarelas de pago.</p>
+
+            <h3>1. Cimientos del repositorio y control de versiones</h3>
+            <p>Inicializa el control de versiones localmente en el directorio de tu proyecto y realiza el primer empaquetado de tus archivos estáticos:</p>
+            <pre><code>cd /ruta/a/tu/proyecto-web
+git init
+git add .
+git commit -m "Arquitectura inicial del sitio web"</code></pre>
+
+            <h3>2. Conexión con el repositorio remoto</h3>
+            <p>Crea un repositorio remoto en tu perfil (por ejemplo, bajo un identificador como <code class="inline-code">alpfa4a</code>) y enlázalo como origen principal de tu estación de trabajo:</p>
+            <pre><code>git branch -M main
+git remote add origin https://github.com/tu-usuario/tu-repositorio.git
+git push -u origin main</code></pre>
+
+            <h3>3. Activación de la soberanía estática (Pages)</h3>
+            <p>Para eximirte de costes de alojamiento y delegar la infraestructura de entrega de contenido de forma gratuita y cifrada:</p>
+            <ol style="margin: 1em 0 1em 1.5em; line-height: 1.6;">
+                <li>Accede a la configuración de tu repositorio en GitHub.</li>
+                <li>Dirígete a la sección <strong>Settings &gt; Pages</strong>.</li>
+                <li>En la fuente de compilación (<em>Build and deployment</em>), selecciona la rama <code class="inline-code">main</code> (o <code class="inline-code">gh-pages</code>) y la carpeta raíz <code class="inline-code">/ (root)</code>.</li>
+                <li>Guarda los cambios. En cuestión de segundos, tu sitio estará accesible de forma pública y global.</li>
+            </ol>
+
+            <h3>4. Dominio propio y personalización mediante <code class="inline-code">CNAME</code></h3>
+            <p>Si deseas apuntar tu propio dominio (como <code class="inline-code">segfdo.es</code>) al alojamiento estático sin perder la independencia, basta con incluir un archivo plano llamado exactamente <code class="inline-code">CNAME</code> en la raíz de tu repositorio que contenga únicamente tu dominio:</p>
+            <pre><code>echo "segfdo.es" > CNAME
+git add CNAME
+git commit -m "Añadir registro CNAME para dominio propio"
+git push origin main</code></pre>
+
+            <div class="note">
+                <strong>📌 Nota de soberanía técnica:</strong> Mantener un sitio web basado en archivos estáticos puros reduce a cero la superficie de ataque frente a vulnerabilidades de bases de datos o backends complejos, garantizando una velocidad de carga óptima y un mantenimiento sostenible en el tiempo.
+            </div>
+        </article>
+
+        <!-- Barra de Navegación de Trinchera para la Raíz -->
+        <nav style="background: #1e1e1e; padding: 12px 20px; font-family: 'DejaVu Sans Mono', monospace; font-size: 0.9rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #ff8c00;">
+        <span style="color: #ff8c00; font-weight: bold;">
+            <a href="../index.html" class="texto-neon">// segfdo.es &gt; ciber-sapiens</a>
+        </span>
+        <div>
+            <a href="tutoriales.html" class="texto-neon" style="margin-left: 15px; text-decoration: none;">🛠️ Cuadernos</a> &bull; 
+            <a href="lectio_1.html" class="texto-neon" style="margin-left: 10px; text-decoration: none;">📖 Lectio</a> &bull; 
+            <a href="poesia.html" class="texto-neon" style="margin-left: 10px; text-decoration: none;">✍️ Poesía</a>
+        </div>
+        </nav>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-hacker">
+    <div class="footer-content">
+    <p>
+    <a href="https://jigsaw.w3.org/css-validator/check/referer" class="image-container">
+    <img style="border:0;width:88px;height:31px" src="images/vcss-blue.gif" alt="Servicio de Validación de Marcaje W3C">
+    </a>
+    <a href="index.html" class="image-container">
+      <img style="border:0;width: 78px;height: 31px" src="images/Logo_segfdo_verde_footer.png" alt="Logo segfdo color verde para footer">
+    </a>
+    </p>
+    © &bull; segfdo.es  &bull; 2026  &bull; Contacto:&#160;<a href="mailto:admin@segfdo.es">admin@segfdo.es</a>
+    </div>
+    </footer>
+
+</body>
+</html>
