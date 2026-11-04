@@ -69,6 +69,7 @@
     text-decoration: underline;
   }
   
+  
   /* Centrar verticalmente la imagen debajo de la lista no ordenada del menÃƒÂº <nav> */
   
   .container {
@@ -133,7 +134,7 @@
     font-weight: 900;
     line-height: 1.1;
     text-align: left;
-    color: #4d4dff;
+    color: #000fff;
 	margin: 0.5em 0;
     page-break-after: avoid;
   }
@@ -141,7 +142,6 @@
   p {
     orphans: 3;
   }
-  
   
   /* Tablas */
   td {

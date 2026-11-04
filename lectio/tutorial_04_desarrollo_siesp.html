@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desarrollo Empírico de SIEsP y la Caza del Cero Absoluto — segfdo.es</title>
+    <link rel="stylesheet" href="css/tutorial-n-tema.css"> <!-- Estilos del tema de tutoriales -->
+    
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+    <link rel="manifest" href="images/site.webmanifest">
+    <style>
+        .tabla-metricas {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5em 0;
+            font-size: 0.9rem;
+        }
+        .tabla-metricas th, .tabla-metricas td {
+            border: 1px solid #e0e0e0;
+            padding: 10px 12px;
+            text-align: left;
+        }
+        .tabla-metricas th {
+            background-color: #1e1e1e;
+            color: #ff8c00;
+        }
+        .badge-error {
+            color: #d9534f;
+            font-weight: bold;
+        }
+        .badge-exito {
+            color: #20c997;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>🛠️ Cuadernos de Trinchera [04]</h1>
+        <div class="subtitle">Desarrollo empírico, refactorización y la caza del cero absoluto en SIEsP.</div>
+    </header>
+
+    <main>
+        <article>
+            <h2>Desarrollo Empírico de SIEsP: De la Incertidumbre en Crudo a la Entropía 1.04</h2>
+            
+            <p>
+                En el cuaderno anterior presentamos las bases teóricas del <strong>SIEsP</strong> (<em>Sistema de Inferencia de Entropía en Python</em>). Sin embargo, la verdadera ingeniería de software soberana no se valida en pizarras abstractas, sino en la trinchera de la terminal.
+            </p>
+
+            <p>
+                Este cuaderno documenta el proceso científico real de calibración del prototipo dentro de un entorno virtual aislado (<code class="inline-code">venv</code>), analizando los errores sintácticos de compatibilidad de API y mostrando la drástica reducción del índice de entropía hasta alcanzar un estado de orden de <strong>1.04</strong>.
+            </p>
+
+            <h3>1. Progresión Empírica de las Pruebas en Terminal</h3>
+            <p>A lo largo de las sesiones de prueba sobre el motor de inferencia y los scripts de prueba, se registraron cuatro fases marcadas por la refactorización lógica y técnica:</p>
+
+            <table class="tabla-metricas">
+                <thead>
+                    <tr>
+                        <th>Fase del Experimento</th>
+                        <th>Sintaxis (Pylint)</th>
+                        <th>Complejidad (Radon)</th>
+                        <th>Tests (Pytest)</th>
+                        <th>Rendimiento</th>
+                        <th>Entropía Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>1. En Crudo (Inicial)</strong><br><small>Fallo en API pylint y sintaxis timeit</small></td>
+                        <td><span class="badge-error">10.00</span> (Error API)</td>
+                        <td>7.00</td>
+                        <td>0.00 (1 passed)</td>
+                        <td><span class="badge-error">5.00</span> (Error syntax)</td>
+                        <td><strong>5.90</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>2. Motor Calibrado</strong><br><small>Captura io.StringIO y stmt en timeit</small></td>
+                        <td>5.00</td>
+                        <td>7.00</td>
+                        <td>0.00 (1 passed)</td>
+                        <td>0.00</td>
+                        <td><strong>3.40</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>3. Corrección de Nomenclatura</strong><br><small>Sustitución de (-) por (_) en módulos</small></td>
+                        <td>2.50</td>
+                        <td>7.00</td>
+                        <td>0.00 (1 passed)</td>
+                        <td>0.00</td>
+                        <td><strong>2.40</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>4. Asalto Definitivo</strong><br><small>Separación de tests y tipado estricto</small></td>
+                        <td><span class="badge-exito">1.11</span></td>
+                        <td><span class="badge-exito">3.00</span></td>
+                        <td><span class="badge-exito">0.00</span></td>
+                        <td><span class="badge-exito">0.00</span></td>
+                        <td><strong style="color: #20c997; font-size: 1.1em;">1.04</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        <h2>Arquitectura del Motor Definitivo (<code class="inline-code">entropy_inference.py</code>)</h2>
+            <p>
+                Tras limar las asperezas de la API, el script central del Guardián quedó estructurado de forma modular y resiliente:
+            </p>
+            <pre><code>"""Módulo optimizado para el cálculo de factoriales bajo el canon de entropía cero."""
+
+import argparse
+import timeit
+import io
+import sys
+import os
+from pylint.lint import Run
+from radon.complexity import cc_visit
+import pytest
+from typing import Dict, Tuple
+
+def analyze_syntax(script_path: str) -> float:
+    """Analiza la calidad del código capturando la nota global de pylint de forma compatible."""
+    old_stdout = sys.stdout
+    try:
+        sys.stdout = io.StringIO()
+        runner = Run([script_path, '--score=y'], exit=False)
+        sys.stdout = old_stdout
+        pylint_score = runner.linter.stats.global_note
+        return max(0.0, 10.0 - float(pylint_score))
+    except Exception as e:
+        sys.stdout = old_stdout
+        try:
+            return max(0.0, 10.0 - float(runner.linter.stats.global_note))
+        except Exception:
+            print(f"Error al analizar sintaxis: {e}")
+            return 10.0
+
+def analyze_complexity(script_path: str) -> float:
+    """Calcula la complejidad ciclomática del script usando radon."""
+    try:
+        with open(script_path, 'r', encoding='utf-8') as file:
+            code = file.read()
+        complexity_results = cc_visit(code)
+        total_complexity = sum(func.complexity for func in complexity_results)
+        return total_complexity
+    except Exception as e:
+        print(f"Error al analizar complejidad: {e}")
+        return 10.0
+
+def analyze_tests(script_path: str) -> float:
+    """Ejecuta las pruebas unitarias asociadas buscando el archivo <code>test_&lt;script&#62;.py</code>."""
+    try:
+        dir_name = os.path.dirname(script_path)
+        base_name = os.path.basename(script_path)
+        test_file = os.path.join(dir_name, f"test_{base_name}")
+        
+        target = test_file if os.path.exists(test_file) else script_path
+        result = pytest.main([target, '-q'])
+        
+        # Si el código de pytest es 5 (no tests encontrados en el objetivo), se neutraliza
+        if result == 5:
+            return 0.0
+            
+        return float(result)
+    except Exception as e:
+        print(f"Error al ejecutar pruebas: {e}")
+        return 5.0
+
+def analyze_performance(script_path: str) -> float:
+    """Mide el tiempo de importación y ejecución del script."""
+    try:
+        module_name = script_path.replace('.py', '').replace('/', '.')
+        execution_time = timeit.timeit(stmt=f"import {module_name}", number=100) / 100
+        return execution_time * 1000.0
+    except Exception as e:
+        return 5.0
+
+def calculate_entropy(script_path: str) -> Tuple[float, Dict[str, float]]:
+    syntax_entropy = analyze_syntax(script_path)
+    complexity_entropy = analyze_complexity(script_path)
+    test_entropy = analyze_tests(script_path)
+    performance_entropy = analyze_performance(script_path)
+    
+    weights = {"syntax": 0.4, "complexity": 0.2, "tests": 0.3, "performance": 0.1}
+    total_entropy = (
+        weights["syntax"] * syntax_entropy +
+        weights["complexity"] * complexity_entropy +
+        weights["tests"] * test_entropy +
+        weights["performance"] * performance_entropy
+    )
+    
+    details = {
+        "syntax": syntax_entropy,
+        "complexity": complexity_entropy,
+        "tests": test_entropy,
+        "performance": performance_entropy
+    }
+    
+    return total_entropy, details
+
+def generate_report(total_entropy: float, details: Dict[str, float]) -> str:
+    report = [
+        "Reporte de Entropía del Script (SIEsP)",
+        "=" * 35,
+        f"Entropía Total: {total_entropy:.2f}",
+        "\nDetalles de Métricas:",
+        f"- Sintaxis (pylint): {details['syntax']:.2f} (0 = óptimo, 10 = alta incertidumbre)",
+        f"- Complejidad ciclomática: {details['complexity']:.2f} (menor es mejor)",
+        f"- Pruebas fallidas: {details['tests']:.2f} (0 = 100% éxito)",
+        f"- Rendimiento (ms escalado): {details['performance']:.2f} (menor es mejor)",
+        "",
+        "Sugerencias del Guardián:",
+    ]
+    
+    if details["syntax"] > 3:
+        report.append("- Revisar formateo y normas de estilo reportadas por pylint.")
+    if details["complexity"] > 5:
+        report.append("- Reducir la complejidad ciclomática desglosando funciones.")
+    if details["tests"] > 0:
+        report.append("- Corregir pruebas unitarias fallidas.")
+    if details["performance"] > 2:
+        report.append("- Optimizar tiempo de ejecución en caliente.")
+    
+    return "\n".join(report)
+
+def main():
+    parser = argparse.ArgumentParser(description="Sistema de Inferencia de Entropía (SIEsP).")
+    parser.add_argument("script", help="Ruta al archivo Python a analizar.")
+    args = parser.parse_args()
+    
+    total_entropy, details = calculate_entropy(args.script)
+    print(generate_report(total_entropy, details))
+
+if __name__ == "__main__":
+    main()</code></pre> 
+
+
+            <h3>2. Hallazgos de Trinchera y Lecciones Técnicas</h3>
+
+            <p><strong>A. Compatibilidad con la API moderna de Pylint (3.x+):</strong></p>
+            <p>
+                Al invocar <code class="inline-code">pylint.lint.Run</code> programáticamente, versiones recientes eliminaron el argumento <code class="inline-code">do_exit</code>. Para evitar colapsos, el motor captura la salida redirigiendo <code class="inline-code">sys.stdout</code> con <code class="inline-code">io.StringIO()</code> e invocando <code class="inline-code">exit=False</code>.
+            </p>
+
+            <p><strong>B. La Trampa de Sintaxis en Módulos y Timeit:</strong></p>
+            <p>
+                Pasar cadenas con banderas de terminal (como <code class="inline-code">-c</code>) dentro de <code class="inline-code">timeit.timeit()</code> genera errores de sintaxis dinámicos. Debe usarse la instrucción exacta <code class="inline-code">stmt="import modulo"</code>.
+            </p>
+
+            <p><strong>C. La Regla del Guion Bajo (<code class="inline-code">_</code>) en Python:</strong></p>
+            <p>
+                Nombrar archivos como <code class="inline-code">mi_script-optimizado.py</code> causa que Python interprete el guion medio (<code class="inline-code">-</code>) como un operador aritmético de resta en los enunciados <code class="inline-code">import</code>. Todos los archivos y módulos deben usar estrictamente guion bajo.
+            </p>
+
+            <h3>3. La Estructura del Código Optimizado (Entropía 1.04)</h3>
+            <p>Para disipar la complejidad acumulada, se separó la lógica de negocio de la suite de pruebas unitarias:</p>
+
+            <p><strong>Lógica pura (<code class="inline-code">mi_script_optimizado_2.py</code>):</strong></p>
+            <pre><code>"""Módulo optimizado para el cálculo de factoriales bajo el canon de entropía cero."""
+
+def calcular_factorial(n: int) -> int:
+    """Calcula el valor factorial de un número entero no negativo.
+
+    Args:
+        n: Número entero del cual se calculará el factorial.
+
+    Returns:
+        El resultado del cálculo factorial.
+    """
+    result = 1
+    for i in range(2, n + 1):
+        result *= i
+    return result
+
+
+def main() -> None:
+    """Punto de entrada principal para la ejecución en caliente."""
+    print(calcular_factorial(5))
+
+
+if __name__ == "__main__":
+    main()</code></pre>
+
+            <p><strong>Suite de pruebas satélite (<code class="inline-code">test_mi_script_optimizado_2.py</code>):</strong></p>
+            <pre><code>"""Suite de pruebas unitarias para validar el módulo de factoriales."""
+from mi_script_optimizado_2 import calcular_factorial
+
+
+def test_calcular_factorial() -> None:
+    """Valida los casos base y de borde del cálculo factorial."""
+    assert calcular_factorial(5) == 120, "Factorial de 5 debe ser 120"
+    assert calcular_factorial(0) == 1, "Factorial de 0 debe ser 1"
+    assert calcular_factorial(1) == 1, "Factorial de 1 debe ser 1"</code></pre>
+
+            <h3>4. Salida Final del Guardián</h3>
+            <pre><code>(venv) alpfa_@alpfa_:~/siesp-prototipo$ python entropy_inference.py mi_script_optimizado_2.py 
+.                                                                        [100%]
+1 passed in 0.02s
+Reporte de Entropía del Script (SIEsP)
+===================================
+Entropía Total: 1.04
+
+Detalles de Métricas:
+- Sintaxis (pylint): 1.11 (0 = óptimo, 10 = alta incertidumbre)
+- Complejidad ciclomática: 3.00 (menor es mejor)
+- Pruebas fallidas: 0.00 (0 = 100% éxito)
+- Rendimiento (ms escalado): 0.00 (menor es mejor)
+
+Sugerencias del Guardián:
+(Sin sugerencias pendientes. Estado de simetría alcanzado.)</code></pre>
+
+            <div class="note">
+                <strong>📌 Reflexión sobre el Cero Absoluto:</strong> Lograr una entropía de 1.04 y despejar las sugerencias de mejora demuestra que el software vivo puede aproximarse asintóticamente al <em>Shibumi</em>: la sencillez máxima nacida no de la escasez, sino del refinamiento técnico.
+            </div>
+        </article>
+
+        <!-- Barra de Navegación de Trinchera -->
+        <nav style="background: #1e1e1e; padding: 12px 20px; font-family: 'DejaVu Sans Mono', monospace; font-size: 0.9rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #ff8c00;">
+            <span style="color: #ff8c00; font-weight: bold;">
+                <a href="../index.html" class="texto-neon">// segfdo.es &gt; ciber-sapiens</a>
+            </span>
+            <div>
+                <a href="tutoriales.html" class="texto-neon" style="margin-left: 15px; text-decoration: none;">🛠️ Cuadernos</a> &bull; 
+                <a href="lectio_1.html" class="texto-neon" style="margin-left: 10px; text-decoration: none;">📖 Lectio</a> &bull; 
+                <a href="poesia.html" class="texto-neon" style="margin-left: 10px; text-decoration: none;">✍️ Poesía</a>
+            </div>
+        </nav>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-hacker">
+        <div class="footer-content">
+            <p>
+                <a href="https://jigsaw.w3.org/css-validator/check/referer" class="image-container">
+                    <img style="border:0;width:88px;height:31px" src="images/vcss-blue.gif" alt="Servicio de Validación de Marcaje W3C">
+                </a>
+                <a href="index.html" class="image-container">
+                    <img style="border:0;width: 78px;height: 31px" src="images/Logo_segfdo_verde_footer.png" alt="Logo segfdo color verde para footer">
+                </a>
+            </p>
+            © &bull; segfdo.es &bull; 2026 &bull; Contacto:&#160;<a href="mailto:admin@segfdo.es">admin@segfdo.es</a>
+        </div>
+    </footer>
+
+</body>
+</html>

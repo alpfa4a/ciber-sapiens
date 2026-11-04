@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inferencia de Entropía y Reflexividad Algorítmica (SIEsP) — segfdo.es</title>
+    <link rel="stylesheet" href="css/tutorial-n-tema.css"> <!-- Ajusta la ruta a tus estilos relativos -->
+    
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+    <link rel="manifest" href="images/site.webmanifest">
+</head>
+<body>
+
+    <header>
+        <h1>🛠️ Cuadernos de Trinchera [03]</h1>
+        <div class="subtitle">Guías prácticas sobre administración soberana, código y entornos Linux.</div>
+    </header>
+
+    <main>
+        <article>
+            <h2>Inferencia de Entropía en Python (SIEsP) y Control de Hybris</h2>
+            
+            <p>Todo script nace con una <code class="inline-code">Entropía</code> intrínseca alta: una medida de incertidumbre, fragilidad lógica y propensión al fallo antes de contrastar sus resultados. La meta de un diseño soberano es evaluar esa entropía mediante inspección estática y métricas dinámicas para guiar el código hacia un estado de <em>entropía cero</em>.</p>
+            
+            <p>Este cuaderno detalla la implementación modular básica del motor de inferencia de entropía en Python y la integración de la cláusula ética <code class="inline-code">hybris_control()</code>.</p>
+
+            <h3>1. Preparación del entorno y dependencias</h3>
+            <p>Asegúrate de trabajar dentro de tu entorno virtual aislado (<code class="inline-code">venv</code>) e instala las librerías de análisis sintáctico y métricas:</p>
+            <pre><code>pip install pylint radon pytest pytest-cov memory_profiler</code></pre>
+
+            <h3>2. Estructura del motor de inferencia de entropía</h3>
+            <p>El siguiente script evalúa errores sintácticos, complejidad ciclomática y fallos en pruebas unitarias para calcular un índice ponderado de entropía:</p>
+            <pre><code># sieps_engine.py
+from pylint.lint import Run
+from radon.complexity import cc_visit
+import pytest
+
+def hybris_control(humility=1.0, collective_intelligence=1.0):
+    """Mecanismo de reflexividad para acotar la ilusión de perfección algorítmica."""
+    return humility * collective_intelligence
+
+def calcular_entropia(script_path):
+    # 1. Análisis sintáctico y de estilo
+    pylint_score = Run([script_path], do_exit=False).linter.stats.global_note
+    errores_sintacticos = max(0, 10 - pylint_score)
+    
+    # 2. Análisis de complejidad ciclomática
+    with open(script_path, 'r', encoding='utf-8') as f:
+        code = f.read()
+    complejidad = sum([f.complexity for f in cc_visit(code)])
+    
+    # 3. Validación mediante pruebas automatizadas
+    pruebas_fallidas = pytest.main(["--cov", script_path])
+    
+    # 4. Cálculo de Entropía Ponderada
+    w1, w2, w3 = 0.4, 0.4, 0.2
+    entropia_base = (w1 * errores_sintacticos) + (w2 * pruebas_fallidas) + (w3 * complejidad)
+    
+    # Ajuste por reflexividad ética
+    factor_humildad = hybris_control()
+    entropia_final = entropia_base / factor_humildad if factor_humildad > 0 else entropia_base
+    
+    return entropia_final
+
+if __name__ == "__main__":
+    score, _ = calcular_entropia("mi_script.py")
+    print(f"Índice de Entropía: {score:.2f}")</code></pre>
+
+            <h3>3. Interpretación de métricas y refactorización</h3>
+            <p>A medida que refactorizas el código y aumentas la cobertura de pruebas, el valor devuelto tenderá a cero:</p>
+            <ul style="margin: 1em 0 1em 1.5em; line-height: 1.6;">
+                <li><strong>Entropía > 5.0:</strong> Sistema caótico o sin validar. Alto riesgo de fallos en producción.</li>
+                <li><strong>Entropía entre 1.0 y 4.9:</strong> Código funcional con deuda técnica o excesiva complejidad ciclomática.</li>
+                <li><strong>Entropía &rarr; 0.0:</strong> Estado de simetría, simplicidad (<em>Shibumi</em>) y eficacia comprobada.</li>
+            </ul>
+
+            <div class="note">
+                <strong>📌 Nota de soberanía técnica:</strong> La función <code class="inline-code">hybris_control()</code> garantiza que el sistema no asuma una perfección computacional absoluta, recordando que toda métrica algorítmica debe estar auditada por la reflexividad y el bien común.
+            </div>
+        </article>
+
+        <!-- Barra de Navegación de Trinchera para la Raíz -->
+        <nav style="background: #1e1e1e; padding: 12px 20px; font-family: 'DejaVu Sans Mono', monospace; font-size: 0.9rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #ff8c00;">
+        <span style="color: #ff8c00; font-weight: bold;">
+            <a href="../index.html" class="texto-neon">// segfdo.es &gt; ciber-sapiens</a>
+        </span>
+        <div>
+            <a href="tutoriales.html" class="texto-neon" style="margin-left: 15px; text-decoration: none;">🛠️ Cuadernos</a> &bull; 
+            <a href="lectio_1.html" class="texto-neon" style="margin-left: 10px; text-decoration: none;">📖 Lectio</a> &bull; 
+            <a href="poesia.html" class="texto-neon" style="margin-left: 10px; text-decoration: none;">✍️ Poesía</a>
+        </div>
+        </nav>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-hacker">
+    <div class="footer-content">
+    <p>
+    <a href="https://jigsaw.w3.org/css-validator/check/referer" class="image-container">
+    <img style="border:0;width:88px;height:31px" src="images/vcss-blue.gif" alt="Servicio de Validación de Marcaje W3C">
+    </a>
+    <a href="index.html" class="image-container">
+      <img style="border:0;width: 78px;height: 31px" src="images/Logo_segfdo_verde_footer.png" alt="Logo segfdo color verde para footer">
+    </a>
+    </p>
+    © &bull; segfdo.es  &bull; 2026  &bull; Contacto:&#160;<a href="mailto:admin@segfdo.es">admin@segfdo.es</a>
+    </div>
+    </footer>
+
+</body>
+</html>
