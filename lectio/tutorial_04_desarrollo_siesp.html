@@ -109,7 +109,7 @@
             <p>
                 Tras limar las asperezas de la API, el script central del Guardián quedó estructurado de forma modular y resiliente:
             </p>
-            <pre><code>"""Módulo optimizado para el cálculo de factoriales bajo el canon de entropía cero."""
+            <pre><code>"""Módulo optimizado para el cálculo de incertidumbre bajo el canon de entropía cero."""
 
 import argparse
 import timeit
@@ -120,6 +120,28 @@ from pylint.lint import Run
 from radon.complexity import cc_visit
 import pytest
 from typing import Dict, Tuple
+
+"""Motor de Inferencia de Entropía en Python (SIEsP) — Proyecto Ciber Sapiens.
+
+Este módulo actúa como el Guardián Cósmico de calidad de software, evaluando la
+incertidumbre y el ruido técnico de scripts en Python mediante una métrica ponderada.
+
+Áreas de auditoría:
+    1. Sintaxis y estilo de código (pylint).
+    2. Complejidad ciclomática y rutas lógicas (radon).
+    3. Validación funcional y suite de pruebas (pytest).
+    4. Coste computacional e importación en caliente (timeit).
+
+Filosofía:
+    Gravitar asintóticamente hacia el cero absoluto de entropía, disipando la fricción 
+    del código hasta alcanzar la sencillez y elegancia soberana del 'Shibumi'.
+
+Uso:
+    $ python entropy_inference.py &lt;ruta_al_script.py&gt;
+
+Autor: —@alpha
+Sitio web: segfdo.es
+"""
 
 def analyze_syntax(script_path: str) -> float:
     """Analiza la calidad del código capturando la nota global de pylint de forma compatible."""
