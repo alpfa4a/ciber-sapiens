@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Magus Ultimus — Transmutador Unicode | segfdo.es</title>
-    
+    <!-- Actualización Nov 6 de 2026 -->
     <!-- Favicons -->
     <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
@@ -517,8 +517,7 @@
     <div id="status" class="status"></div>
 
     <footer>
-        © 2026 segfdo.es &bull; Proyecto Ciber Sapiens &bull; Autor: —@alpha
-        Todos los derechos reservados
+        © 2026 segfdo.es &bull; Proyecto Ciber Sapiens &bull; Autor: —@alpha &bull; Todos los derechos reservados
     </footer>
 
     <script>
@@ -595,29 +594,46 @@
             artistic: "La <<script_bold:belleza>> reside en los <<fraktur:detalles>> más <<bold:pequeños>>",
             formula: "La ecuación <<script_bold:E = mc²>> revolucionó la <<fraktur:física>> moderna"
         };
-        
-        function convertToUnicode(text, style) {
-            const mapping = unicodeMappings[style] || unicodeMappings.cursiva;
+        function applyStyleToSelection(style) {
+            const editor = document.getElementById('textEditor');
+            const start = editor.selectionStart;
+            const end = editor.selectionEnd;
+            const selectedText = editor.value.substring(start, end);
 
-            return [...text.normalize('NFD')]
-            .map(caracter => mapping[caracter] || caracter)
-            .join('');
+            if (selectedText.length === 0) {
+                showStatus('❌ Selecciona texto primero');
+                return;
+            }
+
+            const wrappedText = `<<${style}:${selectedText}>>`;
+            const beforeText = editor.value.substring(0, start);
+            const afterText = editor.value.substring(end);
+
+            saveToHistory();
+            editor.value = beforeText + wrappedText + afterText;
+
+            const newPosition = start + wrappedText.length;
+            editor.setSelectionRange(newPosition, newPosition);
+            editor.focus();
+
+            processText();
+            showStatus(`✅ Aplicado estilo ${style}`);
         }
 
         // Combinaciones diacríticas admitidas para el español
-const combinacionesEspanolas = new Set([
-    'a\u0301', 'e\u0301', 'i\u0301', 'o\u0301', 'u\u0301',
-    'A\u0301', 'E\u0301', 'I\u0301', 'O\u0301', 'U\u0301',
-    'n\u0303', 'N\u0303',
-    'u\u0308', 'U\u0308'
-]);
+        const combinacionesEspanolas = new Set([
+            'a\u0301', 'e\u0301', 'i\u0301', 'o\u0301', 'u\u0301',
+            'A\u0301', 'E\u0301', 'I\u0301', 'O\u0301', 'U\u0301',
+            'n\u0303', 'N\u0303',
+            'u\u0308', 'U\u0308'
+        ]);
 
-const segmentador = new Intl.Segmenter('es', {
-    granularity: 'grapheme'
-});
+        const segmentador = new Intl.Segmenter('es', {
+            granularity: 'grapheme'
+        });
 
-// Motor experimental B
-function convertToUnicodeB(text, style) {
+// Motor experimental B, pasa a definitivo
+function convertToUnicode(text, style) {
     const mapping = unicodeMappings[style] || unicodeMappings.cursiva;
 
     return [...segmentador.segment(text)]
@@ -643,33 +659,6 @@ function convertToUnicodeB(text, style) {
             return segment;
         })
         .join('');
-}
-
-const pruebasB = [
-    'España',
-    'pingüino',
-    'áéíóú ÁÉÍÓÚ',
-    'ñ Ñ ü Ü',
-    'a\u0301 n\u0303 u\u0308',
-    'français',
-    'garçon',
-    'c\u0327',
-    'über',
-    '😀 🌍',
-    'ℭ ℌ ℑ ℜ ℨ ℎ'
-];
-
-for (const estilo of [
-    'cursiva',
-    'bold',
-    'script_bold',
-    'fraktur'
-]) {
-    console.log(`--- ${estilo} ---`);
-
-    for (const prueba of pruebasB) {
-        console.log(prueba, '→', convertToUnicodeB(prueba, estilo));
-    }
 }
 
         function applyStyleToSelection(style) {
@@ -823,7 +812,6 @@ for (const estilo of [
             }
         }
 
-        /*
 
         function processText() {
             isProcessing = true;
@@ -845,37 +833,11 @@ for (const estilo of [
                 return match;
             });
 
-            finalText += convertToUnicode(text.substring(lastIndex), baseStyle);
-            preview.textContent = finalText || 'Tu texto procesado aparecerá aquí...';
+                finalText += convertToUnicode(text.substring(lastIndex), baseStyle);
+                preview.textContent = finalText || 'Tu texto procesado aparecerá aquí...';
 
-            isProcessing = false;
-        } */
-
-        function processText() {
-    isProcessing = true;
-    const editor = document.getElementById('textEditor');
-    const preview = document.getElementById('previewArea');
-    const baseStyle = document.getElementById('baseStyle').value;
-
-    let text = editor.value;
-    const pattern = /<<(\w+):([^>]+)>>/g;
-
-    let finalText = '';
-    let lastIndex = 0;
-
-    text.replace(pattern, (match, style, content, index) => {
-        const beforeText = text.substring(lastIndex, index);
-        finalText += convertToUnicodeB(beforeText, baseStyle);
-        finalText += convertToUnicodeB(content, style);
-        lastIndex = index + match.length;
-        return match;
-    });
-
-    finalText += convertToUnicodeB(text.substring(lastIndex), baseStyle);
-    preview.textContent = finalText || 'Tu texto procesado aparecerá aquí...';
-
-    isProcessing = false;
-}
+                isProcessing = false;
+        }
 
         function copyResult() {
             const preview = document.getElementById('previewArea');
