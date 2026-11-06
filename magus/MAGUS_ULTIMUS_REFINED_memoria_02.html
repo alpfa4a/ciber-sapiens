@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Magus - Desarrollo del Transmutador de texto Unicode">
+<meta name="keywords" content="Segfdo, segfdo">
+<meta name="author" content="Segfdo">
+<link rel="canonical" href="https://segfdo.es/magus/">
+<meta property="og:title" content="Magus Desarrollo | Segfdo">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://segfdo.es/magus/">
+<title>MAGUS ULTIMUS REFINED — Memoria 02</title>
+<!-- Favicons -->
+<link rel="apple-touch-icon" sizes="180x180" href="../lectio/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../lectio/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../lectio/images/favicon-16x16.png">
+<link rel="manifest" href="../lectio/images/site.webmanifest">
+<style>
+:root {
+  --fondo: #f3f1eb;
+  --papel: #fffefa;
+  --texto: #292821;
+  --secundario: #68665d;
+  --borde: #dedbd1;
+  --codigo: #242832;
+  --codigo-texto: #f1f3f5;
+  --resultado: #eef4ef;
+  --acento: #526b83;
+  --accent-gold: #ffc300;
+  --oro-oscuro: #8b6800;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  padding: 32px 18px;
+  background: var(--fondo);
+  color: var(--texto);
+  font: 16px/1.65 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+main {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 42px clamp(22px, 5vw, 58px);
+  background: var(--papel);
+  border: 1px solid var(--borde);
+  box-shadow: 0 8px 28px rgba(0,0,0,.06);
+}
+header { padding-bottom: 24px; border-bottom: 1px solid var(--borde); }
+h1 { margin: 0 0 8px; line-height: 1.2; font-size: clamp(1.8rem, 4vw, 2.5rem); }
+h2 { margin-top: 2.2em; padding-bottom: 8px; border-bottom: 1px solid var(--borde); }
+h3 { margin-top: 1.7em; }
+p, li { max-width: 78ch; }
+.meta { color: var(--secundario); font-size: .92rem; }
+.lema {
+  margin: 26px 0 8px;
+  padding: 16px 20px;
+  border-left: 5px solid var(--accent-gold);
+  background: #fff8df;
+}
+.lema-titulo {
+  color: var(--oro-oscuro);
+  font-weight: 850;
+  letter-spacing: .14em;
+}
+.lema p { margin: 5px 0 0; }
+.bloque {
+  margin: 18px 0;
+  padding: 18px 20px;
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+}
+.etiqueta {
+  display: inline-block;
+  margin-bottom: 8px;
+  color: var(--secundario);
+  font-size: .76rem;
+  font-weight: 750;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.codigo, .resultado {
+  overflow-x: auto;
+  padding: 16px 18px;
+  border-radius: 7px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font: .91rem/1.55 ui-monospace, SFMono-Regular, Consolas, monospace;
+}
+.codigo { background: var(--codigo); color: var(--codigo-texto); }
+.resultado { background: var(--resultado); border: 1px solid #d7e3d8; color: #26372a; }
+.decision { border-left: 4px solid #6c8b70; background: #f3f7f2; }
+.correccion { border-left: 4px solid #bd8c3b; background: #fff9ed; }
+.pendiente { border-left: 4px solid var(--acento); background: #f2f6fa; }
+.nota { color: var(--secundario); font-size: .94rem; }
+table { width: 100%; border-collapse: collapse; margin: 14px 0; }
+th, td { padding: 9px 11px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--borde); }
+th { background: #f4f2ec; }
+code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; }
+footer { margin-top: 42px; padding-top: 16px; border-top: 1px solid var(--borde); color: var(--secundario); font-size: .88rem; }
+@media print {
+  body { padding: 0; background: white; }
+  main { max-width: 650px; padding: 15px; border: 0; box-shadow: none; }
+  .bloque, pre, table { break-inside: avoid; }
+  a { color: inherit; text-decoration: none; }
+}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <p class="meta">CUADERNO DE DESARROLLO · MEMORIA 02 · 6 DE NOVIEMBRE DE 2026</p>
+  <h1> 🎭 MAGUS ULTIMUS REFINED</h1>
+  <p class="meta">Evolución del motor Unicode y cierre de limpieza</p>
+  <div class="lema">
+    <span class="lema-titulo">ORO SÓLIDO</span>
+    <p><strong>Colaboración inter pares, curiosidad compartida, comprobación y aprendizaje mutuo.</strong></p>
+    <p class="nota">No es un adorno del proyecto: expresa el método con el que se ha trabajado. Las propuestas se examinan, se prueban y se corrigen cuando los resultados lo exigen. Ninguna de las partes queda dispensada de comprobar.</p>
+  </div>
+</header>
+
+<section>
+<h2>1. Objetivo de esta etapa</h2>
+<p>Refinar la transformación tipográfica para que respete los caracteres españoles y las combinaciones Unicode, sin modificar innecesariamente otros grafemas. La prioridad ha sido la precisión, no transformar todos los caracteres posibles.</p>
+</section>
+<section>
+<h2>2. Del tratamiento de caracteres a la segmentación de grafemas</h2>
+<p>La primera solución utilizaba normalización NFD y recorría los puntos de código. Permitía transformar vocales acentuadas, la eñe y la u con diéresis, pero también podía separar y transformar parcialmente combinaciones ajenas al español, como la cedilla.</p>
+<p>Se adoptó el motor basado en <code>Intl.Segmenter</code>, con granularidad <code>grapheme</code>. Cada grafema se examina como unidad:</p>
+<ul>
+  <li>Los caracteres sin marcas combinantes se transforman mediante el diccionario del estilo.</li>
+  <li>Se admiten expresamente las combinaciones españolas: vocales con tilde aguda, <code>ñ</code> y <code>ü</code>, en minúscula y mayúscula.</li>
+  <li>Las demás combinaciones se conservan intactas, sin estilizar parcialmente su letra base.</li>
+</ul>
+<p>La lista de combinaciones admitidas y el segmentador se declaran una sola vez, fuera de la función de conversión.</p>
+<section>
+</section>
+<h2>3. Decisiones Unicode conservadas</h2>
+<ul>
+  <li>Se mantienen los cuatro estilos: cursiva, bold, script_bold y fraktur.</li>
+  <li>Se conservan las excepciones históricas de Fraktur: <code>ℭ ℌ ℑ ℜ ℨ</code>.</li>
+  <li>La <code>h</code> minúscula de cursiva utiliza <code>ℎ</code>.</li>
+  <li>Se corrigió la entrada <code>u</code> del diccionario bold para que use el carácter Mathematical Bold correspondiente.</li>
+  <li>No se añaden transformaciones para números ni símbolos: permanecen tal como se escriben.</li>
+  <li>La <code>ü</code> se transforma donde aparezca; el motor trabaja por carácter y combinación admitida, no intenta determinar el idioma de cada palabra.</li>
+</ul>
+</section>
+<section>
+<h2>4. Integración y limpieza</h2>
+<p>Una vez validado el motor experimental, se retiraron los bloques temporales de prueba y la función antigua. La función definitiva pasó a llamarse <code>convertToUnicode()</code>, y se actualizaron sus tres llamadas dentro de <code>processText()</code>.</p>
+<p>La limpieza quedó comprobada mediante una prueba real de la aplicación, después de completar los cambios. No quedaron referencias al nombre provisional <code>convertToUnicodeB()</code>.</p>
+</section>
+<section>
+<h2>5. Prueba final</h2>
+<p>La prueba posterior a la limpieza confirmó:</p>
+<ul>
+  <li>Funcionamiento de los cuatro estilos y de los marcadores de estilo.</li>
+  <li>Compatibilidad con las acciones de deshacer y rehacer (Ctrl+Z y Ctrl+Y).</li>
+  <li>Aplicación del estilo a una selección mediante el botón.</li>
+  <li>Ejecución íntegra en el cliente, sin servidor.</li>
+  <li>Conservación de números, signos, símbolos y emojis.</li>
+  <li>Tratamiento correcto de vocales acentuadas, <code>ñ</code> y <code>ü</code>.</li>
+  <li>Conservación de <code>ç</code> tanto precompuesta como descompuesta, sin estilizar parcialmente la letra base.</li>
+</ul>
+<pre>España y pingüino
+français y garçon
+áéíóú, ñ y ü
+España, ç Ç y 😀</pre>
+<p><strong>Resultado:</strong> prueba satisfactoria. La limpieza del motor Unicode se considera cerrada.</p>
+</section>
+<section>
+<h2>6. Decisiones pendientes para una etapa posterior</h2>
+<ul>
+  <li>Revisar la exportación HTML, en particular el tratamiento de caracteres como <code>&lt;</code> y <code>&amp;</code> al insertar el texto en el documento exportado.</li>
+  <li>Auditar, sin cambiarlo todavía, el patrón de reconocimiento de marcadores de estilo y sus límites.</li>
+  <li>Revisar más adelante el comportamiento de reserva cuando se solicita un estilo desconocido.</li>
+</ul>
+
+<p>Estos asuntos quedan fuera de la limpieza recién concluida; no se mezclan con el motor ya validado.</p>
+
+<p>El proceso ha mostrado que una mejora técnica no consiste en añadir transformaciones indiscriminadamente, sino en definir con claridad qué debe cambiar y qué debe permanecer intacto.</p>
+</section>
+<footer>
+  MAGUS ULTIMUS REFINED · Memoria técnica 02<br>
+  Documento de seguimiento del desarrollo.
+</footer>
+</main>
+</body>
+</html>

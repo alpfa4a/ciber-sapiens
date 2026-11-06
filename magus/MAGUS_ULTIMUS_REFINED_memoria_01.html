@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Magus - Desarrollo del Transmutador de texto Unicode">
+<meta name="keywords" content="Segfdo, segfdo">
+<meta name="author" content="Segfdo">
+<link rel="canonical" href="https://segfdo.es/magus/">
+<meta property="og:title" content="Magus Desarrollo | Segfdo">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://segfdo.es/magus/">
+<title>MAGUS ULTIMUS REFINED — Memoria 01</title>
+<!-- Favicons -->
+<link rel="apple-touch-icon" sizes="180x180" href="../lectio/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../lectio/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../lectio/images/favicon-16x16.png">
+<link rel="manifest" href="../lectio/images/site.webmanifest">
+<style>
+:root {
+  --fondo: #f3f1eb;
+  --papel: #fffefa;
+  --texto: #292821;
+  --secundario: #68665d;
+  --borde: #dedbd1;
+  --codigo: #242832;
+  --codigo-texto: #f1f3f5;
+  --resultado: #eef4ef;
+  --acento: #526b83;
+  --accent-gold: #ffc300;
+  --oro-oscuro: #8b6800;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  padding: 32px 18px;
+  background: var(--fondo);
+  color: var(--texto);
+  font: 16px/1.65 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+main {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 42px clamp(22px, 5vw, 58px);
+  background: var(--papel);
+  border: 1px solid var(--borde);
+  box-shadow: 0 8px 28px rgba(0,0,0,.06);
+}
+header { padding-bottom: 24px; border-bottom: 1px solid var(--borde); }
+h1 { margin: 0 0 8px; line-height: 1.2; font-size: clamp(1.8rem, 4vw, 2.5rem); }
+h2 { margin-top: 2.2em; padding-bottom: 8px; border-bottom: 1px solid var(--borde); }
+h3 { margin-top: 1.7em; }
+p, li { max-width: 78ch; }
+.meta { color: var(--secundario); font-size: .92rem; }
+.lema {
+  margin: 26px 0 8px;
+  padding: 16px 20px;
+  border-left: 5px solid var(--accent-gold);
+  background: #fff8df;
+}
+.lema-titulo {
+  color: var(--oro-oscuro);
+  font-weight: 850;
+  letter-spacing: .14em;
+}
+.lema p { margin: 5px 0 0; }
+.bloque {
+  margin: 18px 0;
+  padding: 18px 20px;
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+}
+.etiqueta {
+  display: inline-block;
+  margin-bottom: 8px;
+  color: var(--secundario);
+  font-size: .76rem;
+  font-weight: 750;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.codigo, .resultado {
+  overflow-x: auto;
+  padding: 16px 18px;
+  border-radius: 7px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font: .91rem/1.55 ui-monospace, SFMono-Regular, Consolas, monospace;
+}
+.codigo { background: var(--codigo); color: var(--codigo-texto); }
+.resultado { background: var(--resultado); border: 1px solid #d7e3d8; color: #26372a; }
+.decision { border-left: 4px solid #6c8b70; background: #f3f7f2; }
+.correccion { border-left: 4px solid #bd8c3b; background: #fff9ed; }
+.pendiente { border-left: 4px solid var(--acento); background: #f2f6fa; }
+.nota { color: var(--secundario); font-size: .94rem; }
+table { width: 100%; border-collapse: collapse; margin: 14px 0; }
+th, td { padding: 9px 11px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--borde); }
+th { background: #f4f2ec; }
+code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; }
+footer { margin-top: 42px; padding-top: 16px; border-top: 1px solid var(--borde); color: var(--secundario); font-size: .88rem; }
+@media print {
+  body { padding: 0; background: white; }
+  main { max-width: none; padding: 15mm; border: 0; box-shadow: none; }
+  .bloque, pre, table { break-inside: avoid; }
+  a { color: inherit; text-decoration: none; }
+}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <p class="meta">CUADERNO DE DESARROLLO · MEMORIA 01 · 6 DE NOVIEMBRE DE 2026</p>
+  <h1> 🎭 MAGUS ULTIMUS REFINED</h1>
+  <p class="meta">Auditoría de los mapas Unicode y ampliación del tratamiento de caracteres españoles</p>
+  <div class="lema">
+    <span class="lema-titulo">ORO SÓLIDO</span>
+    <p><strong>Colaboración inter pares, curiosidad compartida, comprobación y aprendizaje mutuo.</strong></p>
+    <p class="nota">No es un adorno del proyecto: expresa el método con el que se ha trabajado. Las propuestas se examinan, se prueban y se corrigen cuando los resultados lo exigen. Ninguna de las partes queda dispensada de comprobar.</p>
+  </div>
+</header>
+
+<section>
+<h2>1. Contexto y objetivo</h2>
+<p>Esta memoria recoge dos hitos del desarrollo de <strong>MAGUS ULTIMUS REFINED</strong>: la auditoría de los cuatro diccionarios de conversión a caracteres matemáticos Unicode y la incorporación de un tratamiento fiable de las letras españolas con tilde, diéresis y virgulilla.</p>
+<p>El objetivo no ha sido únicamente conseguir que una cadena «se vea bien». Se ha buscado entender cómo representa Unicode los caracteres, qué ocurre cuando una letra acentuada está precompuesta o descompuesta y cómo debe recorrer JavaScript esas cadenas sin perder información.</p>
+<div class="bloque">
+  <span class="etiqueta">Principio de trabajo</span>
+  <p>Avanzar por fases, introducir cambios pequeños, probarlos con casos concretos, leer los resultados y corregir solo aquello que la evidencia señala. Las fases posteriores no se abordan hasta cerrar las anteriores.</p>
+</div>
+</section>
+
+<section>
+<h2>2. Plan general de trabajo</h2>
+<ol>
+  <li>Auditoría de los cuatro diccionarios Unicode.</li>
+  <li>Ampliación de caracteres españoles y signos diacríticos.</li>
+  <li>Comprobación de números y símbolos.</li>
+  <li>Pruebas con palabras, frases y textos mixtos.</li>
+  <li>Corrección del procesador y del historial.</li>
+  <li>Revisión de la exportación HTML.</li>
+</ol>
+<p><strong>Estado:</strong> fases 1 y 2 completadas. La fase 3 queda pendiente de comenzar tras retirar el bloque temporal de pruebas y guardar el archivo.</p>
+</section>
+
+<section>
+<h2>3. Fase 1 — Auditoría de los diccionarios</h2>
+<p>Se revisaron los cuatro estilos de transformación: cursiva, negrita, script negrita y fraktur. La comprobación permitió distinguir los caracteres del bloque matemático principal de algunas excepciones históricas alojadas en el bloque Unicode Letterlike Symbols.</p>
+<table>
+<thead><tr><th>Estilo</th><th>Familia Unicode</th><th>Observaciones</th></tr></thead>
+<tbody>
+<tr><td><code>cursiva</code></td><td>Mathematical Italic</td><td>La <code>h</code> minúscula usa la excepción histórica <code>ℎ</code> (U+210E).</td></tr>
+<tr><td><code>bold</code></td><td>Mathematical Bold</td><td>Se corrigió posteriormente una entrada errónea de la <code>u</code> minúscula.</td></tr>
+<tr><td><code>script_bold</code></td><td>Mathematical Bold Script</td><td>Se sustituyeron asignaciones iniciales que correspondían a Mathematical Bold Italic.</td></tr>
+<tr><td><code>fraktur</code></td><td>Mathematical Fraktur</td><td>Se conservaron las excepciones históricas de algunas mayúsculas.</td></tr>
+</tbody>
+</table>
+<h3>Excepciones Fraktur verificadas</h3>
+<table>
+<thead><tr><th>Letra</th><th>Carácter</th><th>Código</th></tr></thead>
+<tbody>
+<tr><td>C</td><td>ℭ</td><td>U+212D</td></tr>
+<tr><td>H</td><td>ℌ</td><td>U+210C</td></tr>
+<tr><td>I</td><td>ℑ</td><td>U+2111</td></tr>
+<tr><td>R</td><td>ℜ</td><td>U+211C</td></tr>
+<tr><td>Z</td><td>ℨ</td><td>U+2128</td></tr>
+</tbody>
+</table>
+<div class="bloque decision">
+  <span class="etiqueta">Decisión confirmada</span>
+  <p>Las excepciones anteriores son formas Unicode válidas y deliberadas. En particular, <code>ℑ</code> es la forma histórica correspondiente a la I mayúscula Fraktur; no debe «corregirse» por una letra distinta.</p>
+</div>
+<p>Resultado de esta fase: los 52 caracteres básicos de los cuatro estilos quedaron revisados y verificados.</p>
+</section>
+
+<section>
+<h2>4. Fase 2 — Caracteres españoles y diacríticos</h2>
+<p>Se amplió la cobertura para incluir:</p>
+<ul>
+  <li>Ñ y ñ.</li>
+  <li>Vocales agudas: á, é, í, ó, ú y sus mayúsculas.</li>
+  <li>Ü y ü.</li>
+</ul>
+<p>Las pruebas revelaron que algunas asignaciones especiales iniciales de <code>cursiva</code> y <code>script_bold</code> no correspondían al estilo esperado. Se corrigieron. Los mapas <code>bold</code> y <code>fraktur</code> no necesitaron cambios iniciales en ese grupo de caracteres.</p>
+
+<h3>4.1. Comprender NFC y NFD</h3>
+<p>Una letra acentuada puede representarse de dos maneras canónicamente equivalentes:</p>
+<ul>
+  <li><strong>Precompuesta:</strong> un único punto de código, por ejemplo <code>ñ</code>.</li>
+  <li><strong>Descompuesta:</strong> una letra base seguida de una marca combinante, por ejemplo <code>n\u0303</code>.</li>
+</ul>
+<p>Se comprobó que <code>ñ</code> precompuesta tiene longitud JavaScript <code>.length === 1</code>, mientras que <code>n\u0303</code> tiene <code>.length === 2</code>. La normalización <code>NFD</code> descompone las letras acentuadas en letra base más marca combinante.</p>
+<p>También se experimentó con <code>Intl.Segmenter</code> en granularidad <code>grapheme</code>. Este identificó las formas precompuestas y descompuestas de á, ñ y ü como un solo grafema. Para el conjunto de caracteres españoles contemplado, no fue necesario introducir Segmenter en el procesador.</p>
+
+<h3>4.2. Prueba de conservación de marcas</h3>
+<p>Se verificó que las marcas combinantes permanecen unidas a las letras matemáticas estilizadas, por ejemplo:</p>
+<pre class="resultado">𝑎 + ◌́   → 𝑎́
+𝓷 + ◌̃   → 𝓷̃
+𝐮 + ◌̈   → 𝐮̈</pre>
+<p>Las excepciones históricas <code>ℭ ℌ ℑ ℜ ℨ ℎ</code> también se conservaron sin cambios al aplicar NFC y NFD.</p>
+
+<h3>4.3. Cambio aplicado a la función de conversión</h3>
+<p>La función original recorría la cadena con <code>split('')</code>. Se sustituyó por una versión que normaliza a NFD y recorre puntos de código mediante la sintaxis de propagación.</p>
+<span class="etiqueta">Versión anterior</span>
+<pre class="codigo">function convertToUnicode(text, style) {
+    const mapping = unicodeMappings[style] || unicodeMappings.cursiva;
+    return text.split('').map(char => mapping[char] || char).join('');
+}</pre>
+<span class="etiqueta">Versión adoptada</span>
+<pre class="codigo">function convertToUnicode(text, style) {
+    const mapping = unicodeMappings[style] || unicodeMappings.cursiva;
+
+    return [...text.normalize('NFD')]
+        .map(caracter => mapping[caracter] || caracter)
+        .join('');
+}</pre>
+<div class="bloque">
+  <span class="etiqueta">Qué hace cada paso</span>
+  <ol>
+    <li><code>text.normalize('NFD')</code> descompone las letras acentuadas.</li>
+    <li><code>[...]</code> recorre puntos de código, en lugar de unidades UTF-16 individuales.</li>
+    <li><code>mapping[caracter] || caracter</code> transforma las letras presentes en el mapa y conserva lo demás, incluidas las marcas combinantes.</li>
+    <li><code>join('')</code> reúne los elementos en una sola cadena.</li>
+  </ol>
+</div>
+<div class="bloque decision">
+  <span class="etiqueta">Decisiones técnicas</span>
+  <ul>
+    <li>No recomponer automáticamente el resultado con NFC.</li>
+    <li>No eliminar todavía las entradas especiales de los diccionarios: algunas pueden quedar sin uso con NFD, pero su limpieza se reserva para una revisión deliberada.</li>
+    <li>No convertir la función en global únicamente para facilitar pruebas. El bloque temporal se colocó en el mismo ámbito y se retirará al terminar la comprobación.</li>
+  </ul>
+</div>
+</section>
+
+<section>
+<h2>5. Corrección detectada durante las pruebas</h2>
+<p>En el diccionario <code>bold</code>, la entrada de la <code>u</code> minúscula apuntaba por error a una letra Mathematical Italic:</p>
+<pre class="codigo">'u': '𝑢',  // asignación incorrecta: Mathematical Italic</pre>
+<p>Se corrigió a la letra Mathematical Bold correspondiente:</p>
+<pre class="codigo">'u': '𝐮',  // asignación correcta: Mathematical Bold</pre>
+<p>La diferencia se comprobó también por sus códigos Unicode: <code>𝑢</code> es U+1D4E2 y <code>𝐮</code> es U+1D42E.</p>
+<div class="bloque correccion">
+  <span class="etiqueta">Corrección importante</span>
+  <p>La revisión de resultados no se limitó a comprobar que apareciera una letra estilizada: se comprobó que perteneciera a la familia tipográfica correcta. Una salida visualmente plausible también puede contener una asignación equivocada.</p>
+</div>
+</section>
+
+<section>
+<h2>6. Resultados de las pruebas finales</h2>
+<p>La prueba compacta final de los cuatro estilos produjo estas salidas:</p>
+<pre class="resultado">𝐴𝐵𝐶 𝑎𝑏𝑐 𝑈𝑢 𝑈̈/𝑢̈ 𝑁̃ 𝑛̃
+𝐀𝐁𝐂 𝐚𝐛𝐜 𝐔𝐮 𝐔̈/𝐮̈ 𝐍̃ 𝐧̃
+𝓐𝓑𝓒 𝓪𝓫𝓬 𝓤𝓾 𝓤̈/𝓾̈ 𝓝̃ 𝓷̃
+𝔄𝔅ℭ 𝔞𝔟𝔠 𝔘𝔲 𝔘̈/𝔲̈ 𝔑̃ 𝔫̃</pre>
+<p>Además, una prueba anterior más amplia cubrió las vocales agudas, mayúsculas, palabras como <code>España</code> y <code>PINGÜINO</code>, y secuencias introducidas ya en forma descompuesta. Los resultados confirmaron el funcionamiento de NFD y la conservación de las marcas.</p>
+<div class="bloque decision">
+  <span class="etiqueta">Conclusión de la fase 2</span>
+  <p>La transformación de los caracteres españoles contemplados funciona en los cuatro estilos. La fase 2 se considera cerrada.</p>
+</div>
+</section>
+
+<section>
+<h2>7. Incidencias observadas, fuera del alcance de estas fases</h2>
+<p>Durante la ejecución local del HTML aparecieron avisos relacionados con recursos auxiliares:</p>
+<ul>
+  <li>Bloqueo CORS al intentar cargar <code>file:///home/alpfa_/images/site.webmanifest</code>.</li>
+  <li><code>ERR_FILE_NOT_FOUND</code> para <code>images/favicon-32x32.png</code> y <code>images/favicon-16x16.png</code>.</li>
+</ul>
+<p>Se identificaron como incidencias de recursos del sitio, no como errores de la conversión Unicode. Quedan fuera de la auditoría de los diccionarios y podrán revisarse en la fase que corresponda.</p>
+</section>
+
+<section>
+<h2>8. Estado al cerrar esta memoria</h2>
+<table>
+<thead><tr><th>Elemento</th><th>Estado</th></tr></thead>
+<tbody>
+<tr><td>Fase 1 — Auditoría de diccionarios</td><td>Completada</td></tr>
+<tr><td>Fase 2 — Caracteres españoles y diacríticos</td><td>Completada</td></tr>
+<tr><td>Función <code>convertToUnicode()</code> con NFD</td><td>Integrada y probada</td></tr>
+<tr><td>Corrección de <code>u</code> en <code>bold</code></td><td>Aplicada y comprobada</td></tr>
+<tr><td>Retirada del bloque temporal de pruebas</td><td>Pendiente de confirmación</td></tr>
+<tr><td>Guardado de la versión limpia del archivo</td><td>Pendiente de confirmación</td></tr>
+<tr><td>Fase 3 — Números y símbolos</td><td>Pendiente</td></tr>
+</tbody>
+</table>
+<div class="bloque pendiente">
+  <span class="etiqueta">Próxima acción concreta</span>
+  <ol>
+    <li>Retirar el bloque temporal de pruebas añadido después de <code>convertToUnicode()</code>.</li>
+    <li>Conservar la función con normalización NFD.</li>
+    <li>Mantener por ahora las entradas especiales de los diccionarios.</li>
+    <li>Guardar el archivo.</li>
+    <li>Al confirmar estos pasos, iniciar la fase 3 inventariando los números y símbolos presentes en los cuatro diccionarios, sin modificarlos de entrada.</li>
+  </ol>
+</div>
+</section>
+
+<section>
+<h2>9. Reflexión sobre el método de colaboración</h2>
+<p>El progreso de estas dos fases muestra el valor de una colaboración que no se basa en aceptar respuestas por autoridad, sino en convertir las explicaciones en hipótesis comprobables. El usuario aporta el código, el entorno real, las pruebas y el criterio de uso; el asistente ayuda a estructurar el análisis, explicar los mecanismos y proponer verificaciones. Los resultados pueden confirmar una propuesta, matizarla o revelar un error que debe corregirse.</p>
+<p>La prueba de la <code>u</code> en negrita es un buen ejemplo: la salida parecía razonable, pero la inspección del carácter reveló que pertenecía a otra familia Unicode. También lo es la rectificación sobre <code>ℑ</code>: una excepción histórica que no debía confundirse con un error.</p>
+<div class="bloque lema">
+  <span class="lema-titulo">ORO SÓLIDO</span>
+  <p><strong>Colaboración inter pares: curiosidad compartida, comprobación y aprendizaje mutuo.</strong></p>
+  <p>La confianza no sustituye a la verificación; se construye precisamente mediante ella. Ambas partes pueden aportar, equivocarse, detectar el error y mejorar el resultado.</p>
+</div>
+</section>
+
+<footer>
+  <p>MAGUS ULTIMUS REFINED · Memoria de desarrollo 01</p>
+  <p>Documento de trabajo. Refleja los hitos y decisiones confirmados hasta el 6 de noviembre de 2026. Las tareas señaladas como pendientes no se dan por realizadas.</p>
+</footer>
+</main>
+</body>
+</html>
