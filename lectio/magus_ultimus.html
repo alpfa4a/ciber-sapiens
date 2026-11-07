@@ -632,34 +632,148 @@
             granularity: 'grapheme'
         });
 
-// Motor experimental B, pasa a definitivo
-function convertToUnicode(text, style) {
-    const mapping = unicodeMappings[style] || unicodeMappings.cursiva;
+        // Motor experimental B, pasa a definitivo
+        function convertToUnicode(text, style) {
+            const mapping = unicodeMappings[style] || unicodeMappings.cursiva;
 
-    return [...segmentador.segment(text)]
-        .map(({ segment }) => {
-            const descompuesto = segment.normalize('NFD');
-            const caracteres = [...descompuesto];
+            return [...segmentador.segment(text)]
+                .map(({ segment }) => {
+                    const descompuesto = segment.normalize('NFD');
+                    const caracteres = [...descompuesto];
 
-            // Caracteres sin marcas combinantes
-            if (caracteres.length === 1) {
-                return mapping[caracteres[0]] || segment;
+                    // Caracteres sin marcas combinantes
+                    if (caracteres.length === 1) {
+                        return mapping[caracteres[0]] || segment;
+                    }
+
+                    // Combinaciones diacríticas admitidas
+                    if (
+                        caracteres.length === 2 &&
+                        combinacionesEspanolas.has(descompuesto)
+                    ) {
+                        return (mapping[caracteres[0]] || caracteres[0])
+                            + caracteres[1];
+                    }
+
+                    // Cualquier otra combinación se conserva intacta
+                    return segment;
+                })
+                .join('');
+        }
+
+
+        function parseStyledText(text, baseStyle) {
+            const validStyles = new Set([
+                'cursiva', 'bold', 'script_bold', 'fraktur'
+            ]);
+
+            const initialStyle = validStyles.has(baseStyle)
+                ? baseStyle
+                : 'cursiva';
+
+            // Cada elemento de la pila representa el estilo activo.
+            const styleStack = [{ style: initialStyle, name: null }];
+
+            const counts = {
+                cursiva: 0,
+                bold: 0,
+                script_bold: 0,
+                fraktur: 0,
+                total: 0
+            };
+
+            const errors = [];
+
+            let output = '';
+            let plainText = '';
+            let index = 0;
+
+            function flushPlainText() {
+                if (!plainText) return;
+
+                const activeStyle = styleStack[styleStack.length - 1].style;
+
+                output += convertToUnicode(plainText, activeStyle);
+
+                const characters = Array.from(plainText).length;
+                counts[activeStyle] += characters;
+                counts.total += characters;
+
+                plainText = '';
             }
 
-            // Combinaciones diacríticas admitidas
-            if (
-                caracteres.length === 2 &&
-                combinacionesEspanolas.has(descompuesto)
-            ) {
-                return (mapping[caracteres[0]] || caracteres[0])
-                    + caracteres[1];
+            while (index < text.length) {
+
+                // Apertura de un marcador: <<estilo:
+                if (text.startsWith('<<', index)) {
+                    const opening = text.slice(index).match(/^<<(\w+):/);
+
+                    if (opening) {
+                        flushPlainText();
+
+                        const styleName = opening[1];
+                        const currentStyle =
+                            styleStack[styleStack.length - 1].style;
+
+                        if (validStyles.has(styleName)) {
+                            styleStack.push({
+                                style: styleName,
+                                name: styleName
+                            });
+                        } else {
+                            errors.push(`Estilo "${styleName}" no válido`);
+
+                            // Conservamos el estilo anterior hasta el cierre.
+                            styleStack.push({
+                                style: currentStyle,
+                                name: styleName
+                            });
+                        }
+
+                        index += opening[0].length;
+                        continue;
+                    }
+
+                    errors.push('Marcador de apertura mal formado');
+                    plainText += '<<';
+                    index += 2;
+                    continue;
+                }
+
+                // Cierre de un marcador: >>
+                if (text.startsWith('>>', index)) {
+
+                    if (styleStack.length > 1) {
+                        flushPlainText();
+                        styleStack.pop();
+                    } else {
+                        errors.push('Cierre ">>" sin apertura');
+                        plainText += '>>';
+                    }
+
+                    index += 2;
+                    continue;
+                }
+
+                // Avanzamos por puntos de código, no por unidades UTF-16.
+                const character = String.fromCodePoint(
+                    text.codePointAt(index)
+                );
+
+                plainText += character;
+                index += character.length;
             }
 
-            // Cualquier otra combinación se conserva intacta
-            return segment;
-        })
-        .join('');
-}
+            flushPlainText();
+
+            // Detectamos todos los marcadores que quedaron abiertos.
+            for (let i = 1; i < styleStack.length; i++) {
+                errors.push(`Marcador "${styleStack[i].name}" sin cerrar`);
+            }
+
+            return { output, errors, counts };
+        }
+
 
         function applyStyleToSelection(style) {
             const editor = document.getElementById('textEditor');
@@ -687,26 +801,14 @@ function convertToUnicode(text, style) {
             showStatus(`✅ Aplicado estilo ${style}`);
         }
 
+        
         function validateMarkers(text) {
-            const pattern = /<<(\w+):([^>]+)>>/g;
-            const validStyles = ['cursiva', 'bold', 'script_bold', 'fraktur'];
-            const errors = [];
-            let match;
+            const baseStyle =
+                document.getElementById('baseStyle').value;
 
-            while ((match = pattern.exec(text)) !== null) {
-                const style = match[1];
-                if (!validStyles.includes(style)) {
-                    errors.push(`Estilo "${style}" no válido`);
-                }
-            }
-
-            const openBrackets = (text.match(/<<(?!\w+:[^>]+>>)/g) || []).length;
-            if (openBrackets > 0) {
-                errors.push(`${openBrackets} marcador(es) sin cerrar`);
-            }
-
-            return errors;
+            return parseStyledText(text, baseStyle).errors;
         }
+
 
         function updateValidation() {
             const editor = document.getElementById('textEditor');
@@ -722,21 +824,14 @@ function convertToUnicode(text, style) {
             }
         }
 
+        
         function countCharactersByStyle(text) {
-            const counts = { cursiva: 0, bold: 0, script_bold: 0, fraktur: 0, total: text.length };
-            const pattern = /<<(\w+):([^>]+)>>/g;
-            let match;
+            const baseStyle =
+                document.getElementById('baseStyle').value;
 
-            while ((match = pattern.exec(text)) !== null) {
-                const style = match[1];
-                const content = match[2];
-                if (counts.hasOwnProperty(style)) {
-                    counts[style] += content.length;
-                }
-            }
-
-            return counts;
+            return parseStyledText(text, baseStyle).counts;
         }
+
 
         function updateStats() {
             const editor = document.getElementById('textEditor');
@@ -813,31 +908,25 @@ function convertToUnicode(text, style) {
         }
 
 
+        
         function processText() {
             isProcessing = true;
-            const editor = document.getElementById('textEditor');
-            const preview = document.getElementById('previewArea');
-            const baseStyle = document.getElementById('baseStyle').value;
 
-            let text = editor.value;
-            const pattern = /<<(\w+):([^>]+)>>/g;
+            try {
+                const editor = document.getElementById('textEditor');
+                const preview = document.getElementById('previewArea');
+                const baseStyle = document.getElementById('baseStyle').value;
 
-            let finalText = '';
-            let lastIndex = 0;
+                const result = parseStyledText(editor.value, baseStyle);
 
-            text.replace(pattern, (match, style, content, index) => {
-                const beforeText = text.substring(lastIndex, index);
-                finalText += convertToUnicode(beforeText, baseStyle);
-                finalText += convertToUnicode(content, style);
-                lastIndex = index + match.length;
-                return match;
-            });
+                preview.textContent =
+                    result.output || 'Tu texto procesado aparecerá aquí...';
 
-                finalText += convertToUnicode(text.substring(lastIndex), baseStyle);
-                preview.textContent = finalText || 'Tu texto procesado aparecerá aquí...';
-
+            } finally {
                 isProcessing = false;
+            }
         }
+
 
         function copyResult() {
             const preview = document.getElementById('previewArea');
@@ -867,24 +956,55 @@ function convertToUnicode(text, style) {
             showStatus('🗑️ Editor limpiado');
         }
 
+        
         function exportHTML() {
             const preview = document.getElementById('previewArea');
             const font = document.getElementById('fontSelect').value;
-            
+
+            // Escapar caracteres reservados de HTML.
+            const escapedText = preview.textContent.replace(/[&<>]/g, char => {
+                const entities = {
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;'
+                };
+                return entities[char];
+            });
+
             const htmlExport = `<!DOCTYPE html>
-<html><head><meta charset="UTF-8"><title>Texto Unicode Magus Ultimus</title>
-<style>body{font-family:"${font}",sans-serif;font-size:18px;line-height:1.6;padding:20px;background:#0f111a;color:#e1e4ed;}</style>
-</head><body><pre>${preview.textContent}</pre></body></html>`;
+        <html>
+        <head>
+        <meta charset="UTF-8">
+        <title>Texto Unicode Magus Ultimus</title>
+        <style>
+        body {
+            font-family: "${font}", sans-serif;
+            font-size: 18px;
+            line-height: 1.6;
+            padding: 20px;
+            background: #0f111a;
+            color: #e1e4ed;
+        }
+        </style>
+        </head>
+        <body>
+        <pre>${escapedText}</pre>
+        </body>
+        </html>`;
 
             const blob = new Blob([htmlExport], { type: 'text/html' });
             const url = URL.createObjectURL(blob);
+
             const a = document.createElement('a');
-            a.href = url; 
-            a.download = 'magus_ultimus_export.html'; 
+            a.href = url;
+            a.download = 'magus_ultimus_export.html';
             a.click();
+
             URL.revokeObjectURL(url);
+
             showStatus('💾 HTML exportado');
         }
+
 
         function showStatus(message) {
             const status = document.getElementById('status');
